@@ -41,7 +41,7 @@ return array(
 	'PAGE_LIST_ROWS'           => 15,
 	
 	//上传配置
-	'UPLOAD_PATH'              => 'resource/upload/',
+	'UPLOAD_PATH'              => '/upload',
 	'UPLOAD_MAX_SIZE'          => 2,
 	'UPLOAD_ALLOW_EXTS'        => array('png', 'gif', 'jpg', 'jpeg', 'tmp', 'doc', 'docx', 'xls', 'xlsx'),
 	
