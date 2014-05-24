@@ -29,13 +29,13 @@
 			<dl>
 				<dt>新密码：</dt>
 				<dd>
-					<input type="password" name="npassword" class="required alphanumeric npassword" minlength="4" maxlength="16" alt="字母、数字、下划线 4-16位"/>
+					<input type="password" name="npassword" class="required alphanumeric" minlength="4" maxlength="16" alt="字母、数字、下划线 4-16位"/>
 				</dd>
 			</dl>
 			<dl>
 				<dt>新密码确认：</dt>
 				<dd>
-					<input type="password" class="required" equalto=".npassword"/>
+					<input type="password" class="required" equalto="[name='npassword']"/>
 				</dd>
 			</dl>
 		</div>

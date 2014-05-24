@@ -1,0 +1,22 @@
+<h2 class="contentTitle">
+<switch name="Think.ACTION_NAME">
+  <case value="add">添加</case>
+  <case value="edit">编辑</case>
+</switch>
+<block name="title"></block>
+</h2>
+
+<div class="pageContent">
+  <form method="post" action="<block name='action'>__URL__/<switch name='Think.ACTION_NAME'><case value='add'>insert</case><case value='edit'>update</case></switch></block>" class="pageForm" onsubmit="return validateCallback(this, <block name='callback'>navTabAjaxDone</block>)">
+  
+    <block name="content">
+    </block>
+    
+    <div class="formBar">
+      <ul>
+        <li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+        <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+      </ul>
+    </div>
+  </form>
+</div>

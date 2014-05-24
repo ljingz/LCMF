@@ -2,15 +2,15 @@
 
 <block name="pageHeader">
   <div class="pageHeader">
-    <form method="post" action="__ACTION__" rel="pagerForm" onsubmit="return navTabSearch(this)">
+    <form method="get" action="__ACTION__" rel="pagerForm" onsubmit="return navTabSearch(this)">
     <div class="searchBar">
       <table class="searchContent">
         <tr>
           <td>
-            用户名：<input type="text" name="keyword" />
+            用户名：<input type="text" name="username" value="{$Think.get.username}" />
           </td>
           <td>
-            <div class="buttonActive"><div class="buttonContent"><button type="submit">检索</button></div></div>
+            <div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div>
           </td>
         </tr>
       </table>
@@ -19,23 +19,21 @@
   </div>
 </block>
 
-<block name="pageContent-tool">
+<block name="pageContent">
 	<div class="panelBar">
 		<ul class="toolBar">
-			<li><a class="add" href="demo_page4.html" target="navTab"><span>添加</span></a></li>
-			<li><a class="delete" href="demo/common/ajaxDone.html?uid={adminid}" target="ajaxTodo" title="确定要删除吗?"><span>删除</span></a></li>
-			<li><a class="edit" href="demo_page4.html?uid={sid_user}" target="navTab"><span>修改</span></a></li>
+			<li><a class="add" href="__URL__/add" target="navTab" title="添加用户"><span>添加</span></a></li>
+			<li><a class="delete" href="__URL__/delete/adminid/{adminid}" target="ajaxTodo" title="确定要删除吗?"><span>删除</span></a></li>
+			<li><a class="edit" href="__URL__/edit/adminid/{adminid}" target="navTab" title="编辑用户"><span>编辑</span></a></li>
 		</ul>
 	</div>
-</block>
-  
-<block name="pageContent-content">
+
 	<table class="table" width="100%" layoutH="113">
 		<thead>
 			<tr>
 				<th width="50">ID</th>
 				<th>用户名</th>
-				<th width="120">最后登陆ID</th>
+				<th width="120">最后登陆IP</th>
 				<th width="140">最后登陆时间</th>
 			</tr>
 		</thead>
@@ -44,8 +42,8 @@
 			<tr target="adminid" rel="{$vo.adminid}">
       	<td>{$vo.adminid}</td>
 				<td>{$vo.username}</td>
-				<td>{$vo.loginip}</td>
-				<td>{$vo.logintime|date='Y-m-d H:i:s',###}</td>
+				<td>{$vo.loginip|default="--"}</td>
+				<td><notempty name="vo.logintime">{$vo.logintime|date='Y-m-d H:i:s',###}<else/>--</notempty></td>
 			</tr>
 			</volist>
 		</tbody>

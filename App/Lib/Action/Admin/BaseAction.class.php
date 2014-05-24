@@ -14,7 +14,7 @@ class BaseAction extends Action {
 			$this->loginUser = session(C("USER_AUTH_KEY"));
 			$this->assign("loginUser", $this->loginUser);
 			if(!in_array(MODULE_NAME, C("NOT_AUTH_MODULE.".GROUP_NAME))){
-				if(empty($this->loginUser)){
+				if(empty($this->loginUser["adminid"])){
 					if($this->isAjax()){
 						$this->error("会话超时，请重新登陆。", null, array("statusCode"=>-1));
 					}else{
@@ -25,7 +25,7 @@ class BaseAction extends Action {
 		}
 		
 		//设置每页显示数据条数
-		$numPerPage = $this->_post("numPerPage");
+		$numPerPage = $this->_request("numPerPage");
 		if(!empty($numPerPage)){
 			C("NUM_PER_PAGE", $numPerPage);
 		}

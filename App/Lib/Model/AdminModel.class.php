@@ -2,9 +2,15 @@
 if(!defined('APP_NAME')) exit('Access Denied');
 
 class AdminModel extends BaseModel {
-	public function getInfo($query){
-		
-	}
+	protected $_auto = array (
+		array("password", "md5", Model::MODEL_INSERT, "function"),
+		array("password", "md5", Model::MODEL_UPDATE, "function"),		
+        array("createtime", "time", Model::MODEL_INSERT, "function")
+    );
+	
+	protected $_validate = array(
+        array("username", "", "用户名已存在", Model::MUST_VALIDATE, "unique", Model::MODEL_INSERT)
+    );
 	
 	public function sign($username, $password){
 		$info = $this->where(array("username"=>$username))->find();

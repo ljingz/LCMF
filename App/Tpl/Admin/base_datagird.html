@@ -1,9 +1,9 @@
-<form id="pagerForm" method="post" action="__ACTION__">
-	<notempty name="page">
-	<input type="hidden" name="pageNum" value="{$page:nowPage}" />
-	<input type="hidden" name="numPerPage" value="{$page:listRows}" />
+<form id="pagerForm" method="get" action="__ACTION__">
+  <notempty name="page">
+  <input type="hidden" name="pageNum" value="{$page:nowPage}" />
+  <input type="hidden" name="numPerPage" value="{$page:listRows}" />
   </notempty>
-  <block name="pagerFormContent">
+  <block name="pagerForm">
   </block>
 </form>
 
@@ -11,10 +11,7 @@
 </block>
 
 <div class="pageContent">
-	<block name="pageContent-tool">
-	</block>
-  
-	<block name="pageContent-content">
+	<block name="pageContent">
 	</block>
   
   <notempty name="page">
