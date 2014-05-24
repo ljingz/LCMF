@@ -366,10 +366,15 @@ abstract class Action {
      */
     private function dispatchJump($message,$status=1,$jumpUrl='',$ajax=false) {
         if(true === $ajax || IS_AJAX) {// AJAX提交
-            $data           =   is_array($ajax)?$ajax:array();
-            $data['info']   =   $message;
-            $data['status'] =   $status;
-            $data['url']    =   $jumpUrl;
+            $data['message']      =   $message;
+            $data['statusCode']   =   $status;
+            $data['forwardUrl']   =   $jumpUrl;
+            $data['callbackType'] =   'closeCurrent';
+            $data['rel']          =   '';
+            $data['navTabId']     =   '';
+            if(is_array($ajax)){
+            	$data = array_merge($data,$ajax);
+            }
             $this->ajaxReturn($data);
         }
         if(is_int($ajax)) $this->assign('waitSecond',$ajax);
