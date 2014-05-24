@@ -1,0 +1,36 @@
+<form id="pagerForm" method="post" action="__ACTION__">
+	<notempty name="page">
+	<input type="hidden" name="pageNum" value="{$page:nowPage}" />
+	<input type="hidden" name="numPerPage" value="{$page:listRows}" />
+  </notempty>
+  <block name="pagerFormContent">
+  </block>
+</form>
+
+<block name="pageHeader">
+</block>
+
+<div class="pageContent">
+	<block name="pageContent-tool">
+	</block>
+  
+	<block name="pageContent-content">
+	</block>
+  
+  <notempty name="page">
+	<div class="panelBar">
+		<div class="pages">
+			<span>显示</span>
+			<select class="combox" name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value})">
+      	<assign name="numPerPage" value="10"/>
+      	<for start="1" end="6">
+        <option value="{$numPerPage}" <eq name="numPerPage" value="$page:listRows">selected</eq>>{$numPerPage}</option>
+        <assign name="numPerPage" value="$numPerPage*2"/>
+    		</for>
+			</select>
+			<span>条，共{$page:totalRows}条</span>
+		</div>
+		<div class="pagination" targetType="navTab" totalCount="{$page:totalRows}" currentPage="{$page:nowPage}" numPerPage="{$page:listRows}" pageNumShown="10"></div>
+	</div>
+  </notempty>
+</div>

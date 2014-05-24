@@ -14,16 +14,27 @@ class AdminModel extends BaseModel {
 		if(md5($password) != $info["password"]){
 			throw new Exception("密码错误");
 		}
-		$this->loginRecord($info["adminid"]);
+		$this->save(array(
+			"adminid"=>$info["adminid"],
+			"loginip"=>get_client_ip(),
+			"logintime"=>time()
+		));
 		unset($info["password"]);
 		return $info;
 	}
 	
-	protected function loginRecord($adminid){
-		$this->save(array(
+	public function password($adminid, $password, $npassword){
+		$info = $this->find($adminid);
+		if(md5($password) != $info["password"]){
+			throw new Exception("原密码错误");
+		}
+		$data = array(
 			"adminid"=>$adminid,
-			"loginip"=>get_client_ip(),
-			"logintime"=>time()
-		));
+			"password"=>md5($npassword)
+		);
+		if($this->save($data) === false){
+			throw new Exception("修改密码失败");
+		}
+		return true;
 	}
 }

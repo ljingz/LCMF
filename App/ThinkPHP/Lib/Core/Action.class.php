@@ -368,12 +368,15 @@ abstract class Action {
         if(true === $ajax || IS_AJAX) {// AJAX提交
             $data['message']      =   $message;
             $data['statusCode']   =   $status;
-            $data['forwardUrl']   =   $jumpUrl;
-            $data['callbackType'] =   'closeCurrent';
-            $data['rel']          =   '';
-            $data['navTabId']     =   '';
+            if(!empty($jumpUrl)){
+            	$data['forwardUrl']   =   $jumpUrl;
+            }
             if(is_array($ajax)){
             	$data = array_merge($data,$ajax);
+            }else{
+            	$data = array_merge($data,array(
+            		'callbackType'=>'closeCurrent'
+            	));
             }
             $this->ajaxReturn($data);
         }

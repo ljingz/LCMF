@@ -37,8 +37,8 @@ return array(
 	),
 	
 	//分页配置
-	'VAR_PAGE'                 => 'page',
-	'PAGE_LIST_ROWS'           => 15,
+	'VAR_PAGE'                 => 'pageNum',
+	'NUM_PER_PAGE'             => 20,
 	
 	//上传配置
 	'UPLOAD_PATH'              => '/upload',

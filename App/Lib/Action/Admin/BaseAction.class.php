@@ -24,11 +24,10 @@ class BaseAction extends Action {
 			}
 		}
 		
-		//参数解析
-		$params = $this->_get();
-		if(array_key_exists(C("VAR_URL_PARAMS"), $params)){
-			unset($params[C("VAR_URL_PARAMS")]);
+		//设置每页显示数据条数
+		$numPerPage = $this->_post("numPerPage");
+		if(!empty($numPerPage)){
+			C("NUM_PER_PAGE", $numPerPage);
 		}
-		$this->assign("params", json_encode(new ArrayObject($params)));
 	}
 }

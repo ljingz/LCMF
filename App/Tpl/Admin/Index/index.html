@@ -46,7 +46,7 @@ $(function(){
 				<a class="logo" href="__URL__">__PAGE__TITLE__</a>
 				<ul class="nav">
 					<li><a>你好，{$loginUser.username}</a></li>
-					<li><a href="http://bbs.dwzjs.com" target="_blank">修改密码</a></li>
+					<li><a href="__GROUP__/Admin/profile" target="navTab" rel="profile">修改密码</a></li>
 					<li><a href="__GROUP__/Login/signout">退出</a></li>
 				</ul>
 				<ul class="themeList" id="themeList">
@@ -67,32 +67,8 @@ $(function(){
 			</div>
 			<div id="sidebar">
 				<div class="toggleCollapse"><h2>主菜单</h2><div>收缩</div></div>
-				<div class="accordion" fillSpace="sidebar">
-					<div class="accordionHeader">
-						<h2><span>Folder</span>界面组件</h2>
-					</div>
-					<div class="accordionContent">
-						<ul class="tree treeFolder">
-							<li><a href="tabsPage.html" target="navTab">主框架面板</a>
-								<ul>
-									<li><a href="main.html" target="navTab" rel="main">我的主页</a></li>
-									<li><a href="http://www.baidu.com" target="navTab" rel="page1">页面一(外部页面)</a></li>
-								</ul>
-							</li>
-						</ul>
-					</div>
-          <!-- end accordionContent -->
-          <div class="accordionHeader">
-						<h2><span>Folder</span>系统设置</h2>
-					</div>
-					<div class="accordionContent">
-						<ul class="tree">
-              <li><a href="__GROUP__/Admin" target="navTab" rel="Admin">用户管理</a></li>
-						</ul>
-					</div>
-          <!-- end accordionContent -->
-				</div>
-        <!-- end accordion -->
+        <!-- menu -->
+				<include file="menu" />
 			</div>
 		</div>
     
@@ -114,17 +90,8 @@ $(function(){
 				<div class="navTab-panel tabsPageContent layoutBox">
 					<div class="page unitBox">
 						<div class="accountInfo">
-							<div class="alertInfo">
-								<h2><a href="doc/dwz-user-guide.pdf" target="_blank">DWZ框架使用手册(PDF)</a></h2>
-								<a href="doc/dwz-user-guide.swf" target="_blank">DWZ框架演示视频</a>
-							</div>
-							<div class="right">
-								<p><a href="doc/dwz-user-guide.zip" target="_blank" style="line-height:19px">DWZ框架使用手册(CHM)</a></p>
-								<p><a href="doc/dwz-ajax-develop.swf" target="_blank" style="line-height:19px">DWZ框架Ajax开发视频教材</a></p>
-							</div>
-							<p><span>DWZ富客户端框架</span></p>
-							<p>DWZ官方微博:<a href="http://weibo.com/dwzui" target="_blank">http://weibo.com/dwzui</a></p>
-						</div>
+            	<!-- main -->
+							<include file="main" />
 					</div>
 				</div>
 			</div>
