@@ -1,0 +1,55 @@
+<extend name="./base_form" />
+
+<block name="title">模型</block>
+
+<block name="content">
+	<style type="text/css">
+		table.itemDetail th, table.itemDetail td {
+			line-height: 21px;
+			padding: 5px;
+		}
+	</style>
+
+	<notempty name="data">
+  <input type="hidden" name="tableid" value="{$data.tableid}"/>
+  </notempty>
+  <div class="pageFormContent nowrap" layoutH="97">
+  	<p><strong>基本信息</strong></p>
+    <dl>
+      <dt>数据表名：</dt>
+      <dd>
+      	<notempty name="data">
+        {$data.name}
+        <else/>
+        <input type="text" name="name" size="30" class="required lettersonly" minlength="2" maxlength="10"/>
+        </notempty>
+      </dd>
+    </dl>
+    <dl>
+      <dt>模型名称：</dt>
+      <dd>
+        <input type="text" name="title" size="30" class="required"/>
+      </dd>
+    </dl>
+    <dl>
+      <dt>描述：</dt>
+      <dd>
+        <input type="text" name="description" size="60"/>
+      </dd>
+    </dl>
+    <div class="divider"></div>
+    <p><strong>模型字段</strong></p>
+    <dl>
+    <table width="600" class="nowrap itemDetail" addButton="添加字段">
+    	<thead>
+      	<th type="text" name="field[#index#][name]" size="12" fieldClass="required">字段名</th>
+        <th type="text" name="field[#index#][title]" size="12" fieldClass="required">标题</th>
+        <th type="select" name="field[#index#][element]" fieldClass="required" json='{:json_encode(data('table','element'))}'>类型</th>
+        <th type="select" name="field[#index#][validate]" json='{:json_encode(data('table','validate'))}'>验证</th>
+        <th type="del" width="60">操作</th>
+      </thead>
+      <tbody></tbody>
+    </table>
+    </dl>
+  </div>
+</block>

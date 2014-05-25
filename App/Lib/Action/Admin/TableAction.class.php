@@ -1,16 +1,15 @@
 <?php
 if(!defined('APP_NAME')) exit('Access Denied');
 
-class AdminAction extends BaseAction {
+class TableAction extends BaseAction {
 	public function index(){
-		import("ORG.Util.Page");
-		$Admin = D("Admin");
-		$username = $this->_get("username");
-		if(!empty($username)){
-			$options["query"]["username"] = array("like", sprintf("%%%s%%", $username));
+		$Table = D("Table");
+		$title = $this->_get("title");
+		if(!empty($title)){
+			$options["query"]["title|name"] = array("like", sprintf("%%%s%%", $title));
 		}
-		$data = $Admin->getPageList($options);
-		$this->assign($data);
+		$datas = $Table->getList($options);
+		$this->assign("datas", $datas);
 		$this->display();
 	}
 	
