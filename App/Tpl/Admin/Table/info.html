@@ -7,11 +7,15 @@
 		table.itemDetail th, table.itemDetail td {
 			line-height: 21px;
 			padding: 5px;
+			vertical-align:top;
+		}
+		table.itemDetail thead th fieldHtml {
+			display: none;
 		}
 	</style>
 
 	<notempty name="data">
-  <input type="hidden" name="tableid" value="{$data.tableid}"/>
+  <input type="hidden" name="table[tableid]" value="{$data.tableid}"/>
   </notempty>
   <div class="pageFormContent nowrap" layoutH="97">
   	<p><strong>基本信息</strong></p>
@@ -21,31 +25,51 @@
       	<notempty name="data">
         {$data.name}
         <else/>
-        <input type="text" name="name" size="30" class="required lettersonly" minlength="2" maxlength="10"/>
+        <input type="text" name="table[name]" size="30" class="required lettersonly" minlength="2" maxlength="10"/>
         </notempty>
       </dd>
     </dl>
     <dl>
       <dt>模型名称：</dt>
       <dd>
-        <input type="text" name="title" size="30" class="required"/>
+        <input type="text" name="table[title]" size="30" class="required"/>
       </dd>
     </dl>
     <dl>
       <dt>描述：</dt>
       <dd>
-        <input type="text" name="description" size="60"/>
+        <input type="text" name="table[description]" size="60"/>
       </dd>
     </dl>
     <div class="divider"></div>
     <p><strong>模型字段</strong></p>
     <dl>
-    <table width="600" class="nowrap itemDetail" addButton="添加字段">
+    <table width="100%" class="nowrap itemDetail" addButton="添加字段">
     	<thead>
-      	<th type="text" name="field[#index#][name]" size="12" fieldClass="required">字段名</th>
-        <th type="text" name="field[#index#][title]" size="12" fieldClass="required">标题</th>
-        <th type="select" name="field[#index#][element]" fieldClass="required" json='{:json_encode(data('table','element'))}'>类型</th>
-        <th type="select" name="field[#index#][validate]" json='{:json_encode(data('table','validate'))}'>验证</th>
+      	<th type="text" name="field[#index#][name]" size="12" fieldClass="required lettersonly" fieldAttrs="{'minlength':2,'maxlength':10}" width="25%">字段名</th>
+        <th type="text" name="field[#index#][title]" size="12" fieldClass="required" fieldAttrs="{'minlength':2,'maxlength':20}" width="25%">标题</th>
+        <th type="select" name="field[#index#][element]" fieldClass="required" width="25%">
+        <fieldHtml>
+        <select>
+        <option value=""></option>
+        <volist name=":data('table','element')" id="value">
+        	<option value="{$key}">{$value.name}</option>
+        </volist>
+        </select>
+        </fieldHtml>
+        类型
+        </th>
+        <th type="select" name="field[#index#][validate]">
+        <fieldHtml>
+        <select>
+        <option value=""></option>
+        <volist name=":data('table','validate')" id="value">
+        	<option value="{$value}">{$value}</option>
+        </volist>
+        </select>
+        </fieldHtml>
+        验证
+        </th>
         <th type="del" width="60">操作</th>
       </thead>
       <tbody></tbody>

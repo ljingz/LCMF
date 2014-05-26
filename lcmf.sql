@@ -12,13 +12,7 @@ MySQL - 5.5.20 : Database - lcmf
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`lcmf` /*!40100 DEFAULT CHARACTER SET utf8 */;
-
-USE `lcmf`;
-
 /*Table structure for table `lcmf_admin` */
-
-DROP TABLE IF EXISTS `lcmf_admin`;
 
 CREATE TABLE `lcmf_admin` (
   `adminid` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户ID',
@@ -33,11 +27,9 @@ CREATE TABLE `lcmf_admin` (
 
 /*Data for the table `lcmf_admin` */
 
-insert  into `lcmf_admin`(`adminid`,`username`,`password`,`loginip`,`logintime`,`createtime`) values (1,'admin','21232f297a57a5a743894a0e4a801fc3','127.0.0.1',1400987955,1),(2,'test','21232f297a57a5a743894a0e4a801fc3',NULL,NULL,1),(3,'test2','222',NULL,NULL,1),(4,'test1','96e79218965eb72c92a549dd5a330112',NULL,NULL,1400939568),(6,'user','ee11cbb19052e40b07aac0ca060c23ee',NULL,NULL,1400988526);
+insert  into `lcmf_admin`(`adminid`,`username`,`password`,`loginip`,`logintime`,`createtime`) values (1,'admin','21232f297a57a5a743894a0e4a801fc3','127.0.0.1',1401102940,1),(2,'test','21232f297a57a5a743894a0e4a801fc3',NULL,NULL,1),(3,'test2','222',NULL,NULL,1),(4,'test1','96e79218965eb72c92a549dd5a330112',NULL,NULL,1400939568),(6,'user','ee11cbb19052e40b07aac0ca060c23ee',NULL,NULL,1400988526);
 
 /*Table structure for table `lcmf_column` */
-
-DROP TABLE IF EXISTS `lcmf_column`;
 
 CREATE TABLE `lcmf_column` (
   `columnid` int(11) NOT NULL AUTO_INCREMENT COMMENT '栏目ID',
@@ -52,8 +44,6 @@ CREATE TABLE `lcmf_column` (
 /*Data for the table `lcmf_column` */
 
 /*Table structure for table `lcmf_data` */
-
-DROP TABLE IF EXISTS `lcmf_data`;
 
 CREATE TABLE `lcmf_data` (
   `dataid` int(11) NOT NULL COMMENT '数据ID',
@@ -72,23 +62,20 @@ CREATE TABLE `lcmf_data` (
 
 /*Table structure for table `lcmf_table` */
 
-DROP TABLE IF EXISTS `lcmf_table`;
-
 CREATE TABLE `lcmf_table` (
   `tableid` int(11) NOT NULL AUTO_INCREMENT COMMENT '模型ID',
   `name` varchar(50) NOT NULL COMMENT '数据表名',
   `title` varchar(50) NOT NULL COMMENT '模型名称',
   `description` varchar(255) DEFAULT NULL COMMENT '模型描述',
-  PRIMARY KEY (`tableid`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`tableid`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 /*Data for the table `lcmf_table` */
 
-insert  into `lcmf_table`(`tableid`,`name`,`title`,`description`) values (1,'111','111',NULL),(2,'222','222',NULL),(3,'333','333',NULL),(4,'444','444',NULL),(5,'555','555',NULL),(6,'666','666',NULL);
+insert  into `lcmf_table`(`tableid`,`name`,`title`,`description`) values (1,'111','111',NULL),(2,'222','222',NULL),(3,'333','333',NULL),(4,'444','444',NULL),(5,'555','555',NULL),(6,'666','666',NULL),(13,'test','测试','测试嗷嗷啊');
 
 /*Table structure for table `lcmf_table_field` */
-
-DROP TABLE IF EXISTS `lcmf_table_field`;
 
 CREATE TABLE `lcmf_table_field` (
   `fieldid` int(11) NOT NULL AUTO_INCREMENT COMMENT '字段ID',
@@ -99,11 +86,13 @@ CREATE TABLE `lcmf_table_field` (
   `validate` varchar(20) DEFAULT NULL COMMENT '表单验证',
   `sequence` int(11) DEFAULT '0' COMMENT '表单顺序',
   PRIMARY KEY (`fieldid`),
-  KEY `tableid` (`tableid`),
+  UNIQUE KEY `table-field-name` (`tableid`,`name`),
   CONSTRAINT `FK_lcmf_table_field` FOREIGN KEY (`tableid`) REFERENCES `lcmf_table` (`tableid`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 /*Data for the table `lcmf_table_field` */
+
+insert  into `lcmf_table_field`(`fieldid`,`tableid`,`name`,`title`,`element`,`validate`,`sequence`) values (11,13,'aa','嗷嗷','text','required',0),(12,13,'bb','抱抱','textarea','',0),(13,13,'cc','吃醋','date','',0),(14,13,'dd','等等','file','',0),(15,13,'ee','嗯嗯','editor','',0);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

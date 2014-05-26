@@ -18,10 +18,12 @@ class TableAction extends BaseAction {
 	}
 	
 	public function insert(){
-		$Admin = D("Admin");
+		$Table = D("Table");
+		$table = $this->_post("table");
+		$field = $_POST["field"];
 		try{
-			$Admin->insert();
-			$this->success("添加用户成功", null, array(
+			$Table->build($table, $field);
+			$this->success("添加模型成功", null, array(
 				"callbackType"=>"closeCurrent",
 				"navTabId"=>MODULE_NAME
 			));
@@ -58,18 +60,6 @@ class TableAction extends BaseAction {
 			$this->success("删除用户成功", null, array(
 				"navTabId"=>MODULE_NAME
 			));
-		}
-	}
-	
-	public function password($password, $npassword){
-		$Admin = D("Admin");
-		try{
-			$Admin->password($this->loginUser["adminid"], $password, $npassword);
-			$this->success("密码修改成功", null, array(
-				"navTabId"=>"profile"
-			));
-		}catch(Exception $ex){
-			$this->error($ex->getMessage());
 		}
 	}
 }
