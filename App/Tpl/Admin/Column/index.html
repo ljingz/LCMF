@@ -1,0 +1,22 @@
+<extend name="./base_form" />
+
+<block name="content">
+	<style type="text/css">
+		.column {padding: 10px;}
+		.column ul {padding: 0 0 0 20px;}
+		.column ul li, .column li {line-height: 24px;}
+		.column .btnAdd, .column .btnDel {float:right;}
+	</style>
+
+  <div layoutH="47">
+    <ul class="column">
+    	<li>
+      	<strong>信息栏目</strong>
+      	<a class='btnAdd' href='javascript:void(0)'>添加子栏目</a>
+        {$datas}
+      </li>
+    </ul>
+  </div>
+</block>
+
+<block name="submit">保存</block>
