@@ -4,22 +4,10 @@
 
 <block name="content">
 	<style type="text/css">
-		div.pageFormContent .config label {
-			width: auto;
-			padding: 0;
-			margin: 0 10px 0 0;
-			vertical-align: middle;
-		}div.pageFormContent .config label input {
-			margin: 0 3px 0 0;
-			vertical-align: middle;
-		}
 		table.itemDetail th, table.itemDetail td {
 			line-height: 21px;
 			padding: 5px;
 			vertical-align:top;
-		}
-		table.itemDetail thead th fieldHtml {
-			display: none;
 		}
 	</style>
 
@@ -66,7 +54,7 @@
       <dt>操作：</dt>
       <dd>
         <volist name=":data('table','action')" id="value">
-					<label><input type="checkbox" name="table[action][]" value="{$key}" checked/> {$value}</label>
+					<label><input type="checkbox" name="table[action][]" value="{$key}" class="mr5" checked/> {$value}</label>
 				</volist>
 				（仅对列表有效）
       </dd>
@@ -99,7 +87,7 @@
 				</fieldHtml>
 				验证
 				</th>
-				<th type="checkbox" name="field[#index#][list]" defaultVal="1" width="80">列表展示</th>
+				<th type="checkbox" name="field[#index#][list]" defaultVal="1" width="60">列表展示</th>
 				<th type="del" width="60">操作</th>
 			</thead>
       <tbody>

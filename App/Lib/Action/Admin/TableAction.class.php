@@ -37,35 +37,4 @@ class TableAction extends BaseAction {
 			$this->error($ex->getMessage());
 		}
 	}
-	
-	public function edit($adminid){
-		$Admin = D("Admin");
-		$data = $Admin->find($adminid);
-		$this->assign("data", $data);
-		$this->display("info");
-	}
-	
-	public function update(){
-		$Admin = D("Admin");
-		try{
-			$Admin->update();
-			$this->success("编辑用户成功", null, array(
-				"callbackType"=>"closeCurrent",
-				"navTabId"=>MODULE_NAME
-			));
-		}catch(Exception $ex){
-			$this->error($ex->getMessage());
-		}
-	}
-	
-	public function delete($adminid){
-		$Admin = D("Admin");
-		if($Admin->delete($adminid) === false){
-			$this->error("删除用户失败");
-		}else{
-			$this->success("删除用户成功", null, array(
-				"navTabId"=>MODULE_NAME
-			));
-		}
-	}
 }

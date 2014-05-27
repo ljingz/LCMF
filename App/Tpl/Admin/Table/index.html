@@ -23,8 +23,10 @@
 	<div class="panelBar">
 		<ul class="toolBar">
 			<li><a class="add" href="__URL__/add" target="navTab" title="添加模型"><span>添加</span></a></li>
+      <!--
 			<li><a class="delete" href="__URL__/delete/tableid/{tableid}" target="ajaxTodo" title="确定要删除吗?"><span>删除</span></a></li>
 			<li><a class="edit" href="__URL__/edit/tableid/{tableid}" target="navTab" title="编辑模型"><span>编辑</span></a></li>
+      -->
 		</ul>
 	</div>
 
@@ -32,8 +34,8 @@
 		<thead>
 			<tr>
 				<th width="50">ID</th>
-				<th width="140">模型名称</th>
-				<th width="200">数据表名</th>
+				<th width="150">数据表名</th>
+        <th width="200">模型名称</th>
 				<th>描述</th>
 			</tr>
 		</thead>
@@ -41,8 +43,8 @@
     	<volist name="datas" id="vo">
 			<tr target="tableid" rel="{$vo.tableid}">
       	<td>{$vo.tableid}</td>
-      	<td>{$vo.title}</td>
-				<td>{$vo.name}</td>
+      	<td>{$vo.name}</td>
+				<td>{$vo.title}</td>
 				<td>{$vo.description}</td>
 			</tr>
 			</volist>

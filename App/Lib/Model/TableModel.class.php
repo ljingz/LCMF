@@ -13,15 +13,14 @@ class TableModel extends BaseModel {
 		$this->startTrans();
 		try{
 			$tableid = $this->insert($table);
-			$TableField->build($tableid, $field);
 			$this->_build($table["name"]);
+			$TableField->build($tableid, $field);
 			$TableField->_alter($table["name"], $field);
 			$this->commit();
 		}catch(Exception $ex){
 			$this->rollback();
 			throw new Exception($ex->getMessage());
 		}
-		
 	}
 	
 	protected function _build($tablename){

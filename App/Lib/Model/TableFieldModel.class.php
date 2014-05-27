@@ -19,7 +19,7 @@ class TableFieldModel extends BaseModel {
 	
 	public function _alter($tablename, $field){
 		foreach($field as $data){
-			$alter[] = sprintf("ADD1 COLUMN `%s` %s NULL COMMENT '%s'", $data["name"], strtoupper(data("table", "element", $data["element"], "type")), $data["title"]);
+			$alter[] = sprintf("ADD COLUMN `%s` %s NULL COMMENT '%s'", $data["name"], strtoupper(data("table", "field", "element", $data["element"], "type")), $data["title"]);
 		}
 		$sql = sprintf("ALTER TABLE `%s%s` %s", C("DB_PREFIX"), $tablename, implode(",", $alter));
 		if($this->execute($sql) === false){
