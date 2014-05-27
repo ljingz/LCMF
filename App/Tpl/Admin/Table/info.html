@@ -99,13 +99,14 @@
 				</fieldHtml>
 				验证
 				</th>
+				<th type="checkbox" name="field[#index#][list]" defaultVal="1" width="80">列表展示</th>
 				<th type="del" width="60">操作</th>
 			</thead>
       <tbody>
       	<volist name="field" id="vo">
 				<tr class="unitBox">
 					<td>
-						<input class="required lettersonly textInput" type="text" maxlength="10" minlength="2" size="12" value="{$vo.name}" name="field[0][name]" readonly>
+						<input class="required lettersonly textInput" type="text" maxlength="10" minlength="2" size="12" value="{$vo.name}" name="field[0][name]" <eq name="Think.ACTION_NAME" value="edit">readonly</eq>>
 					</td>
 					<td>
 						<input class="required textInput" type="text" maxlength="20" minlength="2" size="12" value="{$vo.title}" name="field[0][title]">
@@ -124,6 +125,9 @@
 							<option value="{$value}" <eq name="vo.validate" value="$value">selected</eq>>{$value}</option>
 							</volist>
 						</select>
+					</td>
+					<td>
+						<input type="checkbox" value="1" name="field[0][list]" checked/>
 					</td>
 					<td>
 						<a class="btnDel disabled" href="javascript:void(0)">删除</a>

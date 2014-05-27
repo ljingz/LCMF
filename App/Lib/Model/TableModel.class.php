@@ -9,6 +9,7 @@ class TableModel extends BaseModel {
 	
 	public function build($table, $field){
 		$TableField = D("TableField");
+		$this->execute("SET AUTOCOMMIT = 0");
 		$this->startTrans();
 		try{
 			$tableid = $this->insert($table);
@@ -20,6 +21,7 @@ class TableModel extends BaseModel {
 			$this->rollback();
 			throw new Exception($ex->getMessage());
 		}
+		
 	}
 	
 	protected function _build($tablename){
