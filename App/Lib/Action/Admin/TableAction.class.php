@@ -14,6 +14,12 @@ class TableAction extends BaseAction {
 	}
 	
 	public function add(){
+		$this->assign("field", array(array(
+			"name"=>"title",
+			"title"=>"标题",
+			"element"=>"text",
+			"validate"=>"required"
+		)));
 		$this->display("info");
 	}
 	
