@@ -4,6 +4,15 @@
 
 <block name="content">
 	<style type="text/css">
+		div.pageFormContent .config label {
+			width: auto;
+			padding: 0;
+			margin: 0 10px 0 0;
+			vertical-align: middle;
+		}div.pageFormContent .config label input {
+			margin: 0 3px 0 0;
+			vertical-align: middle;
+		}
 		table.itemDetail th, table.itemDetail td {
 			line-height: 21px;
 			padding: 5px;
@@ -38,7 +47,28 @@
     <dl>
       <dt>描述：</dt>
       <dd>
-        <input type="text" name="table[description]" size="60"/>
+        <input type="text" name="table[description]" size="30"/>
+      </dd>
+    </dl>
+    <div class="divider"></div>
+    <p><strong>模型配置</strong></p>
+    <dl class="config">
+      <dt>数据类型：</dt>
+      <dd>
+      	<select name="table[type]">
+      	<volist name=":data('table','type')" id="value">
+					<option value="{$key}">{$value}</option>
+				</volist>
+				</select>
+      </dd>
+    </dl>
+    <dl class="config">
+      <dt>操作：</dt>
+      <dd>
+        <volist name=":data('table','action')" id="value">
+					<label><input type="checkbox" name="table[action][]" value="{$key}" checked/> {$value}</label>
+				</volist>
+				（仅对列表有效）
       </dd>
     </dl>
     <div class="divider"></div>
@@ -51,7 +81,7 @@
 				<th type="select" name="field[#index#][element]" fieldClass="required" width="25%">
 				<fieldHtml>
 				<select>
-				<volist name=":data('table','element')" id="value">
+				<volist name=":data('table','field','element')" id="value">
 					<option value="{$key}">{$value.name}</option>
 				</volist>
 				</select>
@@ -62,7 +92,7 @@
 				<fieldHtml>
 				<select>
 				<option value=""></option>
-				<volist name=":data('table','validate')" id="value">
+				<volist name=":data('table','field','validate')" id="value">
 					<option value="{$value}">{$value}</option>
 				</volist>
 				</select>
@@ -82,7 +112,7 @@
 					</td>
 					<td>
 						<select class="required" name="field[0][element]">
-							<volist name=":data('table','element')" id="value">
+							<volist name=":data('table','field','element')" id="value">
 							<option value="{$key}" <eq name="vo.element" value="$key">selected</eq>>{$value.name}</option>
 							</volist>
 						</select>
@@ -90,7 +120,7 @@
 					<td>
 						<select name="field[0][validate]">
 							<option value=""></option>
-							<volist name=":data('table','validate')" id="value">
+							<volist name=":data('table','field','validate')" id="value">
 							<option value="{$value}" <eq name="vo.validate" value="$value">selected</eq>>{$value}</option>
 							</volist>
 						</select>

@@ -1,9 +1,8 @@
-/*
+﻿/*
 SQLyog 企业版 - MySQL GUI v8.14 
 MySQL - 5.5.20 : Database - lcmf
 *********************************************************************
-*/
-
+*/
 /*!40101 SET NAMES utf8 */;
 
 /*!40101 SET SQL_MODE=''*/;
@@ -98,3 +97,8 @@ insert  into `lcmf_table_field`(`fieldid`,`tableid`,`name`,`title`,`element`,`va
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+#2014-05-27#
+ALTER TABLE `lcmf_table`     ADD COLUMN `type` ENUM('list','content') DEFAULT 'list' NOT NULL COMMENT '数据类型' AFTER `description`,     ADD COLUMN `action` VARCHAR(255) NULL COMMENT '操作方法' AFTER `type`;
+ALTER TABLE `lcmf_data` DROP COLUMN `title`;
+ALTER TABLE `lcmf_table_field`     ADD COLUMN `list` ENUM('0','1') DEFAULT '0' NULL COMMENT '列表展示' AFTER `validate`;
