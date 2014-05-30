@@ -4,29 +4,39 @@ if(!defined('APP_NAME')) exit('Access Denied');
 class ColumnAction extends BaseAction {
 	public function index(){
 		$Column = D("Column");
-		$tree = $Column->getTree();
-		$this->assign("datas", $this->buildTree($tree));
+		$Table = D("Table");
+		$this->assign("tree", $Column->getTree());
+		$this->assign("tables", $Table->getMap());
 		$this->display();
-	}
-	
-	protected function buildTree($tree){
-		$html = "<ul>";
-		foreach($tree as $data){
-			$html .= "<li>";
-			$html .= $data["name"];
-			$html .= "<a class='btnDel' href='javascript:void(0)'>删除栏目</a>";
-			$html .= "<a class='btnAdd' href='javascript:void(0)'>添加子栏目</a>";
-			if(is_array($data["child"])){
-				$html .= $this->buildTree($data["child"]);
-			}
-			$html .= "</li>";
-		}
-		$html .= "</ul>";
-		return $html;
 	}
 	
 	public function add(){
 		$this->display("info");
+	}
+	
+	public function save(){
+		$Column = D("Column");
+		$columns = $this->_post("column");
+		$Column->startTrans();
+		try{
+			$sequence = 0;
+			foreach($columns as $columnid=>$column){
+				$column["sequence"] = $sequence;
+				if(array_key_exists($column["parentid"], $tmp)){
+					$column["parentid"] = $tmp[$column["parentid"]];
+				}
+				if($Column->exists($columnid)){
+					$Column->update($column);
+				}else{
+					$tmp[$columnid] = $Column->insert($column);
+				}
+				$sequence ++;
+			}
+			$Column->commit();
+		}catch(Exception $ex){
+			$Column->rollback();
+			$this->error($ex->getMessage());
+		}
 	}
 	
 	public function insert(){
@@ -59,17 +69,6 @@ class ColumnAction extends BaseAction {
 			));
 		}catch(Exception $ex){
 			$this->error($ex->getMessage());
-		}
-	}
-	
-	public function delete($adminid){
-		$Admin = D("Admin");
-		if($Admin->delete($adminid) === false){
-			$this->error("删除用户失败");
-		}else{
-			$this->success("删除用户成功", null, array(
-				"navTabId"=>MODULE_NAME
-			));
 		}
 	}
 }

@@ -9,6 +9,12 @@
 			padding: 5px;
 			vertical-align:top;
 		}
+		.pageFormContent label.action {
+			width: auto;
+			padding: 0;
+			margin: 0 10px 0 0;
+			vertical-align: middle;
+		}
 	</style>
 
 	<notempty name="data">
@@ -54,7 +60,7 @@
       <dt>操作：</dt>
       <dd>
         <volist name=":data('table','action')" id="value">
-					<label><input type="checkbox" name="table[action][]" value="{$key}" class="mr5" checked/> {$value}</label>
+					<label class="action"><input type="checkbox" name="table[action][]" value="{$key}" class="mr5" checked/> {$value}</label>
 				</volist>
 				（仅对列表有效）
       </dd>
@@ -87,7 +93,7 @@
 				</fieldHtml>
 				验证
 				</th>
-				<th type="checkbox" name="field[#index#][list]" defaultVal="1" width="60">列表展示</th>
+				<th type="checkbox" name="field[#index#][list]" defaultVal="1" width="60">列表</th>
 				<th type="del" width="60">操作</th>
 			</thead>
       <tbody>

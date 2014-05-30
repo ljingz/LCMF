@@ -1,19 +1,44 @@
 <extend name="./base_form" />
 
+<block name='action'>__URL__/save</block>
+
 <block name="content">
 	<style type="text/css">
-		.column {padding: 10px;}
-		.column ul {padding: 0 0 0 20px;}
-		.column ul li, .column li {line-height: 24px;}
-		.column .btnAdd, .column .btnDel {float:right;}
+		.column li div {padding: 9px;}
+		.column li div.hover {background:#f5f5f5;}
+		.column li .btnAdd, .column li .btnDel, .column li .tableSelect {float: right; margin-left: 6px;}
+		.column li .tableSelect {margin-right: 50px;}
 	</style>
+	
+	<php>
+		function buildHtml($tree, $tables, $level = 1){
+			$html = "<ul>";
+			foreach($tree as $data){
+				$html .= "<li>";
+				$html .= "<div>";
+				$html .= "<span style='padding-left:".($level*20)."px;'>".$data["name"]."</span>";
+				$html .= "<a class='btnAdd' href='javascript:void(0)' title='添加子栏目'></a>";
+				$html .= "<a class='btnDel' href='javascript:void(0)' title='删除栏目'></a>";
+				$html .= "<span class='tableSelect'>".$tables[$data["tableid"]]."</span>";
+				$html .= "</div>";
+				if(is_array($data["child"])){
+					$html .= buildHtml($data["child"], $tables, $level + 1);
+				}
+				$html .= "</li>";
+			}
+			$html .= "</ul>";
+			return $html;
+		}
+	</php>
 
   <div layoutH="47">
     <ul class="column">
     	<li>
+    		<div>
       	<strong>信息栏目</strong>
-      	<a class='btnAdd' href='javascript:void(0)'>添加子栏目</a>
-        {$datas}
+      	<a class='btnAdd action' href='javascript:void(0)'>添加子栏目</a>
+    		</div>
+        {:buildHtml($tree, $tables)}
       </li>
     </ul>
   </div>

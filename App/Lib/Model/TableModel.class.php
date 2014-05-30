@@ -34,4 +34,12 @@ class TableModel extends BaseModel {
 	public function alter($table, $field){
 		
 	}
+	
+	public function getMap(){
+		$datas = $this->getList();
+		foreach($datas as $data){
+			$map[$data["tableid"]] = $data["title"];
+		}
+		return $map;
+	}
 }

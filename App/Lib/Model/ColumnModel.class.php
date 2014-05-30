@@ -17,4 +17,11 @@ class ColumnModel extends BaseModel {
 		}
 		return $tree;
 	}
+	
+	public function exists($columnid){
+		if($this->where(array("columnid"=>$columnid))->count() > 0){
+			return true;
+		}
+		return false;
+	}
 }
