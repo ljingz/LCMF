@@ -25,49 +25,19 @@ class ColumnAction extends BaseAction {
 				}
 				if($Column->exists($columnid)){
 					$Column->update($column);
+					$exclude[] = $columnid;
 				}else{
 					$tmp[$columnid] = $Column->insert($column);
+					$exclude[] = $tmp[$columnid];
 				}
 			}
+			$Column->where(array("columnid"=>array("not in", $exclude)))->delete();
 			$Column->commit();
 			$this->success("保存栏目成功", null, array(
 				"navTabId"=>MODULE_NAME
 			));
 		}catch(Exception $ex){
 			$Column->rollback();
-			$this->error($ex->getMessage());
-		}
-	}
-	
-	public function insert(){
-		$Admin = D("Admin");
-		try{
-			$Admin->insert();
-			$this->success("添加用户成功", null, array(
-				"callbackType"=>"closeCurrent",
-				"navTabId"=>MODULE_NAME
-			));
-		}catch(Exception $ex){
-			$this->error($ex->getMessage());
-		}
-	}
-	
-	public function edit($adminid){
-		$Admin = D("Admin");
-		$data = $Admin->find($adminid);
-		$this->assign("data", $data);
-		$this->display("info");
-	}
-	
-	public function update(){
-		$Admin = D("Admin");
-		try{
-			$Admin->update();
-			$this->success("编辑用户成功", null, array(
-				"callbackType"=>"closeCurrent",
-				"navTabId"=>MODULE_NAME
-			));
-		}catch(Exception $ex){
 			$this->error($ex->getMessage());
 		}
 	}
