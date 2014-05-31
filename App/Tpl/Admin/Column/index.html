@@ -17,9 +17,24 @@
 		.column li .btnEdit,
 		.column li .btnDel,
 		.column li .tableSelect {
-			cursor: pointer;
 			float: right;
 			margin-left: 6px;
+			cursor: pointer;
+		}
+		.column li .btnUp,
+		.column li .btnDown {
+			float: right;
+			cursor: pointer;
+		}
+		.column li .btnDown {
+			margin-right: 20px;
+		}
+		.column li .disabled {
+			opacity: .30;
+	    filter: alpha(opacity=30);
+	    -ms-filter: "alpha(opacity=30)";
+	    -khtml-opacity: .30;
+	    -moz-opacity: .30;
 		}
 		.column li .tableSelect {
 			width: 180px;
@@ -57,11 +72,17 @@
 				$html .= "<div columnid='".$data["columnid"]."' level='".$level."' style='padding-left:".($level*20)."px;'>";
 				$html .= "<span>";
 				$html .= $data["name"];
-				$html .= "<input type='text' name='column[".$data["columnid"]."][name]' value='".$data["name"]."' class='textInput hidden' maxlength='20' size='18'/>";
+				$html .= "<input type='text' name='column[".$data["columnid"]."][name]' value='".$data["name"]."' class='textInput hidden' maxlength='20' size='18' autocomplete='off'/>";
 				$html .= "</span>";
 				$html .= "<a class='btnAdd' title='添加子栏目'></a>";
 				$html .= "<a class='btnDel' title='删除栏目'></a>";
 				$html .= "<a class='btnEdit' title='编辑栏目'></a>";
+				$html .= "<a class='btnDown' title='下移'>";
+				$html .= "<img src='__STATIC__/admin/themes/default/images/button/down.png' height='20'/>";
+				$html .= "</a>";
+				$html .= "<a class='btnUp' title='上移'>";
+				$html .= "<img src='__STATIC__/admin/themes/default/images/button/up.png' height='20'/>";
+				$html .= "</a>";
 				$html .= "<span class='tableSelect'>";
 				$html .= $tables[$data["tableid"]];
 				$html .= "<select name='column[".$data["columnid"]."][tableid]' class='hidden'>";
@@ -78,8 +99,8 @@
 		}
 	</php>
 
-  <div layoutH="47">
-    <ul class="column">
+  <div class="column" layoutH="47">
+    <ul>
     	<li>
 			<div columnid="0" level="0">
 			<span><strong>信息栏目</strong></span>
@@ -91,7 +112,8 @@
   </div>
   
   <script type="text/javascript">
-  	var rowHtml = "{:rowHtml($data, $tables)}";
+  	Column.rowHtml = "{:rowHtml($data, $tables)}";
+  	Column.init();
   </script>
 </block>
 

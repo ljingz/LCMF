@@ -1,4 +1,15 @@
 /* Column */
+var Column = {
+	rowHtml: "",
+	init: function(){
+		$(".column ul").each(function(){
+			$(".btnUp,.btnDown", this).removeClass("disabled");
+			$("> li:first > div > .btnUp", this).addClass("disabled");
+			$("> li:last > div > .btnDown", this).addClass("disabled");
+		});
+	}
+};
+
 $(function(){	
 	$(".column li div").live("mouseover", function(event){
 		$(this).addClass("hover");
@@ -17,18 +28,30 @@ $(function(){
 			$(this).parent().after("<ul></ul>");
 			children = $(this).parent().next("ul");
 		}
-		children = $(("<li>" + rowHtml + "</li>").replace(/#columnid#/gm, columnid).replace(/#parentid#/gm, parentid)).appendTo(children);
+		children = $(("<li>" + Column.rowHtml + "</li>").replace(/#columnid#/gm, columnid).replace(/#parentid#/gm, parentid)).appendTo(children);
 		children.find("div").attr("level", level).css("padding-left", (level * 20) + "px");
 		children.find("input,select").removeClass("hidden");
+		Column.init();
 	});
 	
 	$(".column li div .btnDel").live("click", function(){
 		$(this).parents("li:first").remove();
+		Column.init();
 	});
 	
 	$(".column li div .btnEdit").live("click", function(){
 		$(this).siblings("span").each(function(){
 			$(this).html($(this).children().removeClass("hidden"));
 		});
+	});
+	
+	$(".column li div .btnUp").live("click", function(){
+		$(this).parents("li:first").insertBefore($(this).parents("li:first").prev("li"));
+		Column.init();
+	});
+	
+	$(".column li div .btnDown").live("click", function(){
+		$(this).parents("li:first").insertAfter($(this).parents("li:first").next("li"));
+		Column.init();
 	});
 });
