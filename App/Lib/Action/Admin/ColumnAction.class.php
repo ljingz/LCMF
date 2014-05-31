@@ -10,10 +10,6 @@ class ColumnAction extends BaseAction {
 		$this->display();
 	}
 	
-	public function add(){
-		$this->display("info");
-	}
-	
 	public function save(){
 		$Column = D("Column");
 		$columns = $this->_post("column");
