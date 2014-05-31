@@ -38,7 +38,7 @@ class TableModel extends BaseModel {
 	public function getMap(){
 		$datas = $this->getList();
 		foreach($datas as $data){
-			$map[$data["tableid"]] = $data["title"];
+			$map[$data["tableid"]] = $data;
 		}
 		return $map;
 	}

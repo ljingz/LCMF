@@ -19,9 +19,7 @@ class ColumnAction extends BaseAction {
 		$columns = $this->_post("column");
 		$Column->startTrans();
 		try{
-			$sequence = 0;
 			foreach($columns as $columnid=>$column){
-				$column["sequence"] = $sequence;
 				if(array_key_exists($column["parentid"], $tmp)){
 					$column["parentid"] = $tmp[$column["parentid"]];
 				}
@@ -30,9 +28,11 @@ class ColumnAction extends BaseAction {
 				}else{
 					$tmp[$columnid] = $Column->insert($column);
 				}
-				$sequence ++;
 			}
 			$Column->commit();
+			$this->success("保存栏目成功", null, array(
+				"navTabId"=>MODULE_NAME
+			));
 		}catch(Exception $ex){
 			$Column->rollback();
 			$this->error($ex->getMessage());

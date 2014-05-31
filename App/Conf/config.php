@@ -45,6 +45,9 @@ return array(
 	'UPLOAD_MAX_SIZE'          => 2,
 	'UPLOAD_ALLOW_EXTS'        => array('png', 'gif', 'jpg', 'jpeg', 'tmp', 'doc', 'docx', 'xls', 'xlsx'),
 	
+	//参数过滤函数
+	'DEFAULT_FILTER'           => 'requestFilterHandler',
+	
 	//扩展配置
 	'LOAD_EXT_CONFIG'          => 'rbac',
 	

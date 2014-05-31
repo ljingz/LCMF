@@ -6,13 +6,25 @@ class ColumnModel extends BaseModel {
 		array("name", "", "栏目名已存在", Model::MUST_VALIDATE, "unique", Model::MODEL_INSERT)
 	);
 	
-	public function getTree(){
+	protected $_defaults = array(
+		"order"=>"sequence ASC"
+	);
+	
+	public function getMap(){
 		$datas = $this->getList();
+		foreach($datas as $data){
+			$map[$data["columnid"]] = $data;
+		}
+		return $map;
+	}
+	
+	public function getTree(){
+		$datas = $this->getMap();
 		foreach($datas as &$data){
-			$tmp[$data["columnid"]] = &$data;
-			$tmp[$data["parentid"]]["child"][] = &$data;
 			if(empty($data["parentid"])){
 				$tree[] = &$data;
+			}else{
+				$datas[$data["parentid"]]["child"][] = &$data;
 			}
 		}
 		return $tree;

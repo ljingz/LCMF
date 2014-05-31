@@ -6,6 +6,9 @@ var Column = {
 			$(".btnUp,.btnDown", this).removeClass("disabled");
 			$("> li:first > div > .btnUp", this).addClass("disabled");
 			$("> li:last > div > .btnDown", this).addClass("disabled");
+			$("> li", this).each(function(){
+				$("> [name$='[sequence]']", this).val($(this).index());
+			});
 		});
 	}
 };

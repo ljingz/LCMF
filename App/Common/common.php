@@ -27,3 +27,14 @@ function data(){
 	}
 	return $filedata;
 }
+
+/**
+ * 默认过滤函数
+ * */
+function requestFilterHandler($data){
+	if(is_array($data)){
+		return array_map("requestFilterHandler", $data);
+	}else{
+		return htmlspecialchars(trim($data));
+	}
+}

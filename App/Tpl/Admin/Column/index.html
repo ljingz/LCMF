@@ -69,6 +69,7 @@
 					$html .= "<input type='hidden' name='column[".$data["columnid"]."][columnid]' value='".$data["columnid"]."'/>";
 				}
 				$html .= "<input type='hidden' name='column[".$data["columnid"]."][parentid]' value='".$data["parentid"]."'/>";
+				$html .= "<input type='hidden' name='column[".$data["columnid"]."][sequence]' value='".$data["sequence"]."'/>";
 				$html .= "<div columnid='".$data["columnid"]."' level='".$level."' style='padding-left:".($level*20)."px;'>";
 				$html .= "<span>";
 				$html .= $data["name"];
@@ -84,12 +85,12 @@
 				$html .= "<img src='__STATIC__/admin/themes/default/images/button/up.png' height='20'/>";
 				$html .= "</a>";
 				$html .= "<span class='tableSelect'>";
-				$html .= $tables[$data["tableid"]];
+				$html .= $tables[$data["tableid"]]["title"];
 				$html .= "<select name='column[".$data["columnid"]."][tableid]' class='hidden'>";
 				$html .= "<option value=''></option>";
-				foreach($tables as $tableid=>$name){
+				foreach($tables as $tableid=>$table){
 					$html .= "<option value='".$tableid."' ".($data["tableid"]==$tableid?"selected":"default").">";
-					$html .= $name;
+					$html .= $table["title"];
 					$html .= "</option>";
 				}
 				$html .= "</select>";

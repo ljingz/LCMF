@@ -6,7 +6,12 @@ class BaseModel extends Model {
 		if($this->create($data)){
 			$insertid = $this->add();
 			if($insertid === false){
-				Log::write($this->getDbError());
+				if($this->getError()){
+					Log::write($this->getError());
+				}
+				if($this->getDbError()){
+					Log::write($this->getDbError());
+				}
 				throw new Exception("添加数据失败");
 			}
 			return $insertid;
@@ -19,7 +24,12 @@ class BaseModel extends Model {
 		if($this->create($data)){
 			$affectedrows = $this->save();
 			if($affectedrows === false){
-				Log::write($this->getDbError());
+				if($this->getError()){
+					Log::write($this->getError());
+				}
+				if($this->getDbError()){
+					Log::write($this->getDbError());
+				}
 				throw new Exception("编辑数据失败");
 			}
 			return $affectedrows;

@@ -26,7 +26,7 @@ class TableAction extends BaseAction {
 	public function insert(){
 		$Table = D("Table");
 		$table = $this->_post("table");
-		$field = $_POST["field"];
+		$field = $this->_post("field");
 		try{
 			$Table->build($table, $field);
 			$this->success("添加模型成功", null, array(
