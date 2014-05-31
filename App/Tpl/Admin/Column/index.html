@@ -4,10 +4,29 @@
 
 <block name="content">
 	<style type="text/css">
-		.column li div {padding: 9px;}
-		.column li div.hover {background:#f5f5f5;}
-		.column li .btnAdd, .column li .btnDel, .column li .tableSelect {float: right; margin-left: 6px;}
-		.column li .tableSelect {margin-right: 50px;}
+		.column li div {
+			padding: 5px;
+		}
+		.column li div.hover {
+			background:#f5f5f5;
+		}
+		.column li span {
+			line-height: 20px;
+		}
+		.column li .btnAdd,
+		.column li .btnEdit,
+		.column li .btnDel,
+		.column li .tableSelect {
+			cursor: pointer;
+			float: right;
+			margin-left: 6px;
+		}
+		.column li .tableSelect {
+			width: 180px;
+		}
+		.column li .hidden {
+			display: none;
+		}
 	</style>
 	
 	<php>
@@ -15,12 +34,7 @@
 			$html = "<ul>";
 			foreach($tree as $data){
 				$html .= "<li>";
-				$html .= "<div>";
-				$html .= "<span style='padding-left:".($level*20)."px;'>".$data["name"]."</span>";
-				$html .= "<a class='btnAdd' href='javascript:void(0)' title='添加子栏目'></a>";
-				$html .= "<a class='btnDel' href='javascript:void(0)' title='删除栏目'></a>";
-				$html .= "<span class='tableSelect'>".$tables[$data["tableid"]]."</span>";
-				$html .= "</div>";
+				$html .= rowHtml($data, $tables, $level);
 				if(is_array($data["child"])){
 					$html .= buildHtml($data["child"], $tables, $level + 1);
 				}
@@ -29,19 +43,56 @@
 			$html .= "</ul>";
 			return $html;
 		}
+		
+		function rowHtml($data, $tables, $level = 1){
+				if(empty($data["columnid"])){
+					$data = array(
+						"columnid"=>"#columnid#",
+						"parentid"=>"#parentid#"
+					);
+				}else{
+					$html .= "<input type='hidden' name='column[".$data["columnid"]."][columnid]' value='".$data["columnid"]."'/>";
+				}
+				$html .= "<input type='hidden' name='column[".$data["columnid"]."][parentid]' value='".$data["parentid"]."'/>";
+				$html .= "<div columnid='".$data["columnid"]."' level='".$level."' style='padding-left:".($level*20)."px;'>";
+				$html .= "<span>";
+				$html .= $data["name"];
+				$html .= "<input type='text' name='column[".$data["columnid"]."][name]' value='".$data["name"]."' class='textInput hidden' maxlength='20' size='18'/>";
+				$html .= "</span>";
+				$html .= "<a class='btnAdd' title='添加子栏目'></a>";
+				$html .= "<a class='btnDel' title='删除栏目'></a>";
+				$html .= "<a class='btnEdit' title='编辑栏目'></a>";
+				$html .= "<span class='tableSelect'>";
+				$html .= $tables[$data["tableid"]];
+				$html .= "<select name='column[".$data["columnid"]."][tableid]' class='hidden'>";
+				$html .= "<option value=''></option>";
+				foreach($tables as $tableid=>$name){
+					$html .= "<option value='".$tableid."' ".($data["tableid"]==$tableid?"selected":"default").">";
+					$html .= $name;
+					$html .= "</option>";
+				}
+				$html .= "</select>";
+				$html .= "</span>";
+				$html .= "</div>";
+				return $html;
+		}
 	</php>
 
   <div layoutH="47">
     <ul class="column">
     	<li>
-    		<div>
-      	<strong>信息栏目</strong>
-      	<a class='btnAdd action' href='javascript:void(0)'>添加子栏目</a>
-    		</div>
-        {:buildHtml($tree, $tables)}
+			<div columnid="0" level="0">
+			<span><strong>信息栏目</strong></span>
+			<a class='btnAdd action' href='javascript:void(0)'>添加子栏目</a>
+			</div>
+			{:buildHtml($tree, $tables)}
       </li>
     </ul>
   </div>
+  
+  <script type="text/javascript">
+  	var rowHtml = "{:rowHtml($data, $tables)}";
+  </script>
 </block>
 
 <block name="submit">保存</block>

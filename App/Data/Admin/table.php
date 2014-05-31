@@ -3,8 +3,9 @@ if(!defined('APP_NAME')) exit('Access Denied');
 
 return array(
 	"type"=>array(
-		"list"=>"列表",
-		"content"=>"内容"
+		"list"=>"文字列表",
+		"image"=>"图片列表",
+		"content"=>"文字内容"
 	),
 	"action"=>array(
 		"add"=>"添加",
