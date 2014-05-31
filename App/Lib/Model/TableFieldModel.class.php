@@ -4,9 +4,12 @@ if(!defined('APP_NAME')) exit('Access Denied');
 class TableFieldModel extends BaseModel {
 	public function build($tableid, $field){
 		try{
+			$sequence = 0;
 			foreach($field as $data){
 				$data["tableid"] = $tableid;
+				$data["sequence"] = $sequence;
 				$this->insert($data);
+				$sequence ++;
 			}
 		}catch(Exception $ex){
 			throw new Exception("添加模型字段失败");

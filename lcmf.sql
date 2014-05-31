@@ -102,3 +102,7 @@ insert  into `lcmf_table_field`(`fieldid`,`tableid`,`name`,`title`,`element`,`va
 ALTER TABLE `lcmf_table`     ADD COLUMN `type` ENUM('list','content') DEFAULT 'list' NOT NULL COMMENT '数据类型' AFTER `description`,     ADD COLUMN `action` VARCHAR(255) NULL COMMENT '操作方法' AFTER `type`;
 ALTER TABLE `lcmf_data` DROP COLUMN `title`;
 ALTER TABLE `lcmf_table_field`     ADD COLUMN `list` ENUM('0','1') DEFAULT '0' NULL COMMENT '列表展示' AFTER `validate`;
+
+#2014-05-31#
+ALTER TABLE `lcmf_table`     CHANGE `type` `type` ENUM('list','image','content') CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT 'list' NOT NULL COMMENT '数据类型';
+

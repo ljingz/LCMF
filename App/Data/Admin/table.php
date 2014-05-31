@@ -9,6 +9,7 @@ return array(
 	),
 	"action"=>array(
 		"add"=>"添加",
+		"delete"=>"删除",
 		"edit"=>"编辑",
 		"enable"=>"启用",
 		"recommend"=>"推荐",

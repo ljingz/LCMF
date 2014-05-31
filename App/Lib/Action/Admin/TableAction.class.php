@@ -4,9 +4,13 @@ if(!defined('APP_NAME')) exit('Access Denied');
 class TableAction extends BaseAction {
 	public function index(){
 		$Table = D("Table");
+		$type = $this->_get("type");
 		$title = $this->_get("title");
 		if(!empty($title)){
 			$options["query"]["title|name"] = array("like", sprintf("%%%s%%", $title));
+		}
+		if(!empty($type)){
+			$options["query"]["type"] = $type;
 		}
 		$datas = $Table->getList($options);
 		$this->assign("datas", $datas);

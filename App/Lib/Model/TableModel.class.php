@@ -2,6 +2,10 @@
 if(!defined('APP_NAME')) exit('Access Denied');
 
 class TableModel extends BaseModel {
+	protected $_auto = array (
+		array("action", "json_encode", Model::MODEL_BOTH, "function")
+	);
+	
 	protected $_validate = array(
 		array("name", "", "数据表名已存在", Model::MUST_VALIDATE, "unique", Model::MODEL_INSERT),
 		array("title", "", "模型名称已存在", Model::MUST_VALIDATE, "unique", Model::MODEL_INSERT)
@@ -24,7 +28,7 @@ class TableModel extends BaseModel {
 	}
 	
 	protected function _build($tablename){
-		$sql = sprintf("CREATE TABLE `%s%s` (`dataid` int(11) NOT NULL,PRIMARY KEY (`dataid`)) ENGINE=InnoDB DEFAULT CHARSET=utf8", C("DB_PREFIX"), $tablename);
+		$sql = sprintf("CREATE TABLE `%s%s` (`dataid` int(11) NOT NULL, PRIMARY KEY (`dataid`), CONSTRAINT `FK_%s` FOREIGN KEY (`dataid`) REFERENCES `%sdata` (`dataid`) ON DELETE CASCADE) ENGINE=InnoDB DEFAULT CHARSET=utf8", C("DB_PREFIX"), $tablename, $tablename, C("DB_PREFIX"));
 		if($this->execute($sql) === false){
 			Log::write($this->getDbError());
 			throw new Exception("创建模型表失败");

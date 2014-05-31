@@ -58,3 +58,25 @@ $(function(){
 		Column.init();
 	});
 });
+
+/* Table */
+var Table = {
+	init: function(){
+		$(".pageFormContent .itemDetail .field").each(function(){
+			$("> tr", this).each(function(){
+				$("[name$='[sequence]']", this).val($(this).index());
+			});
+		});
+	}
+};
+$(function(){
+	$(".pageFormContent .itemDetail .field .btnUp").live("click", function(){
+		$(this).parents("tr:first").insertBefore($(this).parents("tr:first").prev("tr"));
+		Table.init();
+	});
+	
+	$(".pageFormContent .itemDetail .field .btnDown").live("click", function(){
+		$(this).parents("tr:first").insertAfter($(this).parents("tr:first").next("tr"));
+		Table.init();
+	});
+});

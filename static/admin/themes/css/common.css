@@ -27,6 +27,8 @@
 .pr15 {padding-right: 15px;}
 .pr20 {padding-right: 20px;}
 
+.btnUp:hover, .btnDown:hover {text-decoration: none;}
+
 .pageFormContent input, .pageFormContent textarea, .pageFormContent select {
 	margin-left: 0;
 	vertical-align: middle;
