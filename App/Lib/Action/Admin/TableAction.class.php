@@ -18,12 +18,13 @@ class TableAction extends BaseAction {
 	}
 	
 	public function add(){
-		$this->assign("field", array(array(
+		$this->assign("data", array("field"=>array(array(
 			"name"=>"title",
 			"title"=>"标题",
 			"element"=>"text",
-			"validate"=>"required"
-		)));
+			"validate"=>"required",
+			"list"=>"1"
+		))));
 		$this->display("info");
 	}
 	
@@ -35,6 +36,40 @@ class TableAction extends BaseAction {
 			$Table->build($table, $field);
 			$this->success("添加模型成功", null, array(
 				"callbackType"=>"closeCurrent",
+				"navTabId"=>MODULE_NAME
+			));
+		}catch(Exception $ex){
+			$this->error($ex->getMessage());
+		}
+	}
+	
+	public function edit($tableid){
+		$Table = D("Table");
+		$data = $Table->getInfo($tableid);
+		$this->assign("data", $data);
+		$this->display("info");
+	}
+	
+	public function update(){
+		$Table = D("Table");
+		$table = $this->_post("table");
+		$field = $this->_post("field");
+		try{
+			$Table->build($table, $field);
+			$this->success("添加模型成功", null, array(
+				"callbackType"=>"closeCurrent",
+				"navTabId"=>MODULE_NAME
+			));
+		}catch(Exception $ex){
+			$this->error($ex->getMessage());
+		}
+	}
+	
+	public function delete($tableid){
+		$Table = D("Table");
+		try{
+			$Table->drop($tableid);
+			$this->success("删除模型成功", null, array(
 				"navTabId"=>MODULE_NAME
 			));
 		}catch(Exception $ex){

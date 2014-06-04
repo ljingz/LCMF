@@ -2,6 +2,10 @@
 if(!defined('APP_NAME')) exit('Access Denied');
 
 class TableFieldModel extends BaseModel {
+	protected $_defaults = array(
+		"order"=>"sequence ASC"
+	);
+	
 	public function build($tableid, $field){
 		try{
 			$sequence = 0;

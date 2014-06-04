@@ -17,7 +17,7 @@
 		}
 	</style>
 
-	<notempty name="data">
+	<notempty name="data.tableid">
   <input type="hidden" name="table[tableid]" value="{$data.tableid}"/>
   </notempty>
   <div class="pageFormContent nowrap" layoutH="97">
@@ -25,7 +25,7 @@
     <dl>
       <dt>数据表名：</dt>
       <dd>
-      	<notempty name="data">
+      	<notempty name="data.name">
         {$data.name}
         <else/>
         <input type="text" name="table[name]" size="30" class="required lettersonly" minlength="2" maxlength="10"/>
@@ -35,13 +35,13 @@
     <dl>
       <dt>模型名称：</dt>
       <dd>
-        <input type="text" name="table[title]" size="30" class="required"/>
+        <input type="text" name="table[title]" value="{$data.title}" size="30" class="required"/>
       </dd>
     </dl>
     <dl>
       <dt>描述：</dt>
       <dd>
-        <input type="text" name="table[description]" size="30"/>
+        <input type="text" name="table[description]" value="{$data.description}" size="30"/>
       </dd>
     </dl>
     <div class="divider"></div>
@@ -51,7 +51,7 @@
       <dd>
       	<select name="table[type]">
       	<volist name=":data('table','type')" id="value">
-					<option value="{$key}">{$value}</option>
+					<option value="{$key}" <eq name="data.type" value="$key">selected</eq>>{$value}</option>
 				</volist>
 				</select>
       </dd>
@@ -60,7 +60,7 @@
       <dt>操作：</dt>
       <dd>
         <volist name=":data('table','action')" id="value">
-					<label class="action"><input type="checkbox" name="table[action][]" value="{$key}" class="mr5" checked/> {$value}</label>
+					<label class="action"><input type="checkbox" name="table[action][]" value="{$key}" class="mr5" <in name="key" value="$data.action">checked</in>/> {$value}</label>
 				</volist>
 				（仅对列表有效）
       </dd>
@@ -94,23 +94,17 @@
 				验证
 				</th>
 				<th type="checkbox" name="field[#index#][list]" defaultVal="1" width="40">列表</th>
-				<th type="move" width="60" align="center">
+				<th type="move" width="60">
 				<fieldHtml>
-				<center>
-				<a class='btnUp' href="javascript:void(0)" title='上移'>
-				<img src='__STATIC__/admin/themes/default/images/button/up.png' height='20'/>
-				</a>
-				<a class='btnDown' href="javascript:void(0)" title='下移'>
-				<img src='__STATIC__/admin/themes/default/images/button/down.png' height='20'/>
-				</a>
-				</center>
+				<a class='btnUp' href="javascript:void(0)" title='上移'></a>
+				<a class='btnDown' href="javascript:void(0)" title='下移'></a>
 				</fieldHtml>
 				排序
 				</th>
 				<th type="del" width="40">操作</th>
 			</thead>
       <tbody class="field">
-      	<volist name="field" id="vo">
+      	<volist name="data.field" id="vo">
 				<tr class="unitBox">
 					<td>
 						<input class="required lettersonly textInput" type="text" maxlength="10" minlength="2" size="12" value="{$vo.name}" name="field[0][name]" <eq name="Think.ACTION_NAME" value="edit">readonly</eq>>
@@ -134,17 +128,11 @@
 						</select>
 					</td>
 					<td>
-						<input type="checkbox" value="1" name="field[0][list]" checked/>
+						<input type="checkbox" value="1" name="field[0][list]" <eq name="vo.list" value="1">checked</eq>/>
 					</td>
 					<td>
-						<center>
-						<a class='btnUp' href="javascript:void(0)" title='上移'>
-						<img src='__STATIC__/admin/themes/default/images/button/up.png' height='20'/>
-						</a>
-						<a class='btnDown' href="javascript:void(0)" title='下移'>
-						<img src='__STATIC__/admin/themes/default/images/button/down.png' height='20'/>
-						</a>
-						</center>
+						<a class='btnUp' href="javascript:void(0)" title='上移'></a>
+						<a class='btnDown' href="javascript:void(0)" title='下移'></a>
 					</td>
 					<td>
 						<a class="btnDel disabled" href="javascript:void(0)">删除</a>

@@ -16,18 +16,15 @@
 		.column li .btnAdd,
 		.column li .btnEdit,
 		.column li .btnDel,
+		.column li .btnUp,
+		.column li .btnDown,
 		.column li .tableSelect {
 			float: right;
 			margin-left: 6px;
 			cursor: pointer;
 		}
-		.column li .btnUp,
 		.column li .btnDown {
-			float: right;
-			cursor: pointer;
-		}
-		.column li .btnDown {
-			margin-right: 20px;
+			margin-right: 30px;
 		}
 		.column li .disabled {
 			opacity: .50;
@@ -78,12 +75,8 @@
 				$html .= "<a class='btnAdd' title='添加子栏目'></a>";
 				$html .= "<a class='btnDel' title='删除栏目'></a>";
 				$html .= "<a class='btnEdit' title='编辑栏目'></a>";
-				$html .= "<a class='btnDown' title='下移'>";
-				$html .= "<img src='__STATIC__/admin/themes/default/images/button/down.png' height='20'/>";
-				$html .= "</a>";
-				$html .= "<a class='btnUp' title='上移'>";
-				$html .= "<img src='__STATIC__/admin/themes/default/images/button/up.png' height='20'/>";
-				$html .= "</a>";
+				$html .= "<a class='btnDown' title='下移'></a>";
+				$html .= "<a class='btnUp' title='上移'></a>";
 				$html .= "<span class='tableSelect'>";
 				$html .= $tables[$data["tableid"]]["title"];
 				$html .= "<select name='column[".$data["columnid"]."][tableid]' class='hidden'>";

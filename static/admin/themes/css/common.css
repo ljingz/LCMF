@@ -27,6 +27,26 @@
 .pr15 {padding-right: 15px;}
 .pr20 {padding-right: 20px;}
 
+.btnUp {
+	background: url(../default/images/button/up.png) center top no-repeat ;
+	display:block;
+	width: 22px;
+	height: 20px;
+	text-indent: -1000px;
+	overflow: hidden;
+	float: left;
+	margin-right: 3px;
+}
+.btnDown {
+	background: url(../default/images/button/down.png) center top no-repeat ;
+	display:block;
+	width: 22px;
+	height: 20px;
+	text-indent: -1000px;
+	overflow: hidden;
+	float: left;
+	margin-right: 3px;
+}
 .btnUp:hover, .btnDown:hover {text-decoration: none;}
 
 .pageFormContent input, .pageFormContent textarea, .pageFormContent select {
