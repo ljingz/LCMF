@@ -22,7 +22,6 @@ class TableModel extends BaseModel {
 			$tableid = $this->insert($table);
 			$this->_build($table["name"]);
 			$TableField->build($tableid, $field);
-			$TableField->_alter($table["name"], $field);
 			$this->commit();
 		}catch(Exception $ex){
 			$this->rollback();
@@ -39,11 +38,20 @@ class TableModel extends BaseModel {
 	}
 	
 	public function alter($table, $field){
-		
+		$TableField = D("TableField");
+		$this->startTrans();
+		try{
+			$this->update($table);
+			$TableField->alter($table["tableid"], $field);
+			$this->commit();
+		}catch(Exception $ex){
+			$this->rollback();
+			throw new Exception($ex->getMessage());
+		}
 	}
 	
 	public function drop($tableid){
-		$tablename = $this->where(array("tableid"=>$tableid))->getField("name");
+		$tablename = $this->getFieldByTableid($tableid, "name");
 		$this->startTrans();
 		try{
 			if($this->delete($tableid) === false){

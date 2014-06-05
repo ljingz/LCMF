@@ -55,8 +55,8 @@ class TableAction extends BaseAction {
 		$table = $this->_post("table");
 		$field = $this->_post("field");
 		try{
-			$Table->build($table, $field);
-			$this->success("添加模型成功", null, array(
+			$Table->alter($table, $field);
+			$this->success("编辑模型成功", null, array(
 				"callbackType"=>"closeCurrent",
 				"navTabId"=>MODULE_NAME
 			));

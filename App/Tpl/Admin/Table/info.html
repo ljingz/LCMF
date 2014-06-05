@@ -15,6 +15,9 @@
 			margin: 0 10px 0 0;
 			vertical-align: middle;
 		}
+		.pageFormContent .fieldArea .button,.pageFormContent .fieldArea .rowNum {
+			margin-left: 5px;
+		}
 	</style>
 
 	<notempty name="data.tableid">
@@ -67,8 +70,8 @@
     </dl>
     <div class="divider"></div>
     <p><strong>模型字段</strong></p>
-    <dl>
-    <table width="100%" class="nowrap itemDetail" addButton="添加字段">
+    <dl class="fieldArea">
+    <table width="100%" class="nowrap itemDetail" rowName="字段" addButton="执行">
 			<thead>
 				<th type="text" name="field[#index#][name]" size="12" fieldClass="required lettersonly" fieldAttrs="{'minlength':2,'maxlength':10}">字段名</th>
 				<th type="text" name="field[#index#][title]" size="12" fieldClass="required" fieldAttrs="{'minlength':2,'maxlength':20}">标题</th>
@@ -104,23 +107,26 @@
 				<th type="del" width="40">操作</th>
 			</thead>
       <tbody class="field">
-      	<volist name="data.field" id="vo">
+      	<volist name="data.field" key="line" id="vo">
 				<tr class="unitBox">
 					<td>
-						<input class="required lettersonly textInput" type="text" maxlength="10" minlength="2" size="12" value="{$vo.name}" name="field[0][name]" <eq name="Think.ACTION_NAME" value="edit">readonly</eq>>
+						<notempty name="vo.fieldid">
+						<input type="hidden" name="field[{$line}][fieldid]" value="{$vo.fieldid}">
+						</notempty>
+						<input class="required lettersonly textInput" type="text" maxlength="10" minlength="2" size="12" value="{$vo.name}" name="field[{$line}][name]" <eq name="Think.ACTION_NAME" value="edit">readonly</eq>>
 					</td>
 					<td>
-						<input class="required textInput" type="text" maxlength="20" minlength="2" size="12" value="{$vo.title}" name="field[0][title]">
+						<input class="required textInput" type="text" maxlength="20" minlength="2" size="12" value="{$vo.title}" name="field[{$line}][title]">
 					</td>
 					<td>
-						<select class="required" name="field[0][element]">
+						<select class="required" name="field[{$line}][element]">
 							<volist name=":data('table','field','element')" id="value">
 							<option value="{$key}" <eq name="vo.element" value="$key">selected</eq>>{$value.name}</option>
 							</volist>
 						</select>
 					</td>
 					<td>
-						<select name="field[0][validate]">
+						<select name="field[{$line}][validate]">
 							<option value=""></option>
 							<volist name=":data('table','field','validate')" id="value">
 							<option value="{$value}" <eq name="vo.validate" value="$value">selected</eq>>{$value}</option>
@@ -128,7 +134,7 @@
 						</select>
 					</td>
 					<td>
-						<input type="checkbox" value="1" name="field[0][list]" <eq name="vo.list" value="1">checked</eq>/>
+						<input type="checkbox" value="1" name="field[{$line}][list]" <eq name="vo.list" value="1">checked</eq>/>
 					</td>
 					<td>
 						<a class='btnUp' href="javascript:void(0)" title='上移'></a>
