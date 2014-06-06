@@ -1,11 +1,64 @@
-<div class="alertInfo">
-    <h2><a href="doc/dwz-user-guide.pdf" target="_blank">DWZ框架使用手册(PDF)</a></h2>
-    <a href="doc/dwz-user-guide.swf" target="_blank">DWZ框架演示视频</a>
-  </div>
-  <div class="right">
-    <p><a href="doc/dwz-user-guide.zip" target="_blank" style="line-height:19px">DWZ框架使用手册(CHM)</a></p>
-    <p><a href="doc/dwz-ajax-develop.swf" target="_blank" style="line-height:19px">DWZ框架Ajax开发视频教材</a></p>
-  </div>
-  <p><span>DWZ富客户端框架</span></p>
-  <p>DWZ官方微博:<a href="http://weibo.com/dwzui" target="_blank">http://weibo.com/dwzui</a></p>
+<style type="text/css">
+	.index {padding: 20px;}
+	.index dt {width: 200px;}
+</style>
+
+<div class="pageFormContent nowrap index">
+	<p><strong>服务器信息</strong></p>
+	<div class="divider"></div>
+  <dl>
+    <dt>OS：</dt>
+    <dd>{$Think.server.OS}</dd>
+  </dl>
+  <dl>
+    <dt>SERVER_SOFTWARE：</dt>
+    <dd>{$Think.server.SERVER_SOFTWARE}</dd>
+  </dl>
+  <dl>
+    <dt>PHP_VERSION：</dt>
+    <dd>{:@phpversion()}</dd>
+  </dl>
+  <dl>
+    <dt>MYSQL_VERSION：</dt>
+    <dd>{:@mysql_get_server_info()}</dd>
+  </dl>
+  <dl>
+    <dt>SERVER_ADDR：</dt>
+    <dd>{$Think.server.SERVER_ADDR}</dd>
+  </dl>
+  <dl>
+    <dt>SERVER_PORT：</dt>
+    <dd>{$Think.server.SERVER_PORT}</dd>
+  </dl>
+  <dl>
+    <dt>HTTP_HOST：</dt>
+    <dd>{$Think.server.HTTP_HOST}</dd>
+  </dl>
+  <dl>
+    <dt>DOCUMENT_ROOT：</dt>
+    <dd>{$Think.server.DOCUMENT_ROOT}</dd>
+  </dl>
+  <dl>
+    <dt>ROOT_SIZE：</dt>
+    <dd class="root_size">0.00 B</dd>
+  </dl>
+  <dl>
+    <dt>REMOTE_ADDR：</dt>
+    <dd>{$Think.server.REMOTE_ADDR}</dd>
+  </dl>
+  <dl>
+    <dt>REMOTE_PORT：</dt>
+    <dd>{$Think.server.REMOTE_PORT}</dd>
+  </dl>
+  <dl>
+    <dt>HTTP_USER_AGENT：</dt>
+    <dd>{$Think.server.HTTP_USER_AGENT}</dd>
+  </dl>
 </div>
+<script type="text/javascript">
+	$(function(){
+		$.get("__GROUP__/Index/getRootSize", function(size){
+			$(".index .root_size").html(size);
+		});
+	});
+</script>

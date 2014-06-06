@@ -1,6 +1,9 @@
 <?php
 if(!defined('APP_NAME')) exit('Access Denied');
 
+//加载扩展函数库
+load("extend");
+
 /**
  * 获取自定义数据,自定义数据目录为/Data
  * 
@@ -29,7 +32,7 @@ function data(){
 }
 
 /**
- * 默认过滤函数
+ * 默认参数过滤函数
  * */
 function requestFilterHandler($data){
 	if(is_array($data)){
@@ -37,4 +40,25 @@ function requestFilterHandler($data){
 	}else{
 		return htmlspecialchars(trim($data));
 	}
+}
+
+/**
+ * 计算整个目录文件大小
+ * 
+ * @param string $dir
+ * */
+function getDirSize($dir){
+	$handle = opendir($dir);
+	while (false !== ($file = readdir($handle))){
+		if($file != "." && $file != ".."){
+			$fullpath = $dir."/".$file;
+			if(is_dir($fullpath)){
+				$size += getDirSize($fullpath);
+			}else{
+				$size += filesize($fullpath);
+			}
+		}
+	}
+	closedir($handle);
+	return $size;
 }
