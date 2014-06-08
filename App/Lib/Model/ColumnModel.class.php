@@ -37,6 +37,13 @@ class ColumnModel extends BaseModel {
 		return $data;
 	}
 	
+	public function getTable($columnid){
+		$Table = D("Table");
+		$tableid = $this->getFieldByColumnid($columnid, "tableid");
+		$table = $Table->getInfo($tableid);
+		return $table;
+	}
+	
 	public function exists($columnid){
 		if($this->where(array("columnid"=>$columnid))->count() > 0){
 			return true;

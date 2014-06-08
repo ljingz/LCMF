@@ -106,3 +106,7 @@ ALTER TABLE `lcmf_table_field`     ADD COLUMN `list` ENUM('0','1') DEFAULT '0' N
 #2014-05-31#
 ALTER TABLE `lcmf_table`     CHANGE `type` `type` ENUM('list','image','content') CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT 'list' NOT NULL COMMENT '数据类型';
 
+#2014-06-08#
+ALTER TABLE `lcmf_data` DROP PRIMARY KEY, ADD PRIMARY KEY (`dataid`);
+ALTER TABLE `lcmf_data`     CHANGE `dataid` `dataid` INT(11) NOT NULL AUTO_INCREMENT COMMENT '数据ID';
+ALTER TABLE `lcmf_data` ADD CONSTRAINT `FK_lcmf_data` FOREIGN KEY (`columnid`) REFERENCES `lcmf_column` (`columnid`) ON DELETE CASCADE ;

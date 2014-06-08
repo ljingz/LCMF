@@ -6,13 +6,19 @@
 		height: 300px;
 	}
 </style>
+<empty name="data.dataid">
+<input type="hidden" name="columnid" value="{$Think.get.columnid}"/>
+<else/>
+<input type="hidden" name="dataid" value="{$data.dataid}"/>
+<input type="hidden" name="columnid" value="{$data.columnid}"/>
+</empty>
 <volist name="table.field" id="field">
 <dl>
   <dt>{$field.title}：</dt>
   <dd>
   <switch name="field.element">
   <case value="textarea">
-		<textarea class="textInput wh500 {$field.validate}" name="{$field.name}" rows="5"></textarea>
+		<textarea class="textInput wh500 {$field.validate}" name="{$field.name}" rows="5">{$data[$field['name']]}</textarea>
   </case>
   <case value="date">
   	
@@ -25,15 +31,13 @@
   </case>
   <case value="editor">
   	<php>$rand_string = rand_string(32, 0);</php>
-    <script id="{$rand_string}" name="{$field.name}" class="editor {$field.validate}" type="text/plain">
-    	
-    </script>
+    <script id="{$rand_string}" name="{$field.name}" class="editor {$field.validate}" type="text/plain">{$data[$field['name']]|requestFilterDecode}</script>
     <script type="text/javascript">
         var ue = UE.getEditor('{$rand_string}');
     </script>
   </case>
   <default />
-  	<input type="text" class="textInput wh500 {$field.validate}" name="{$field.name}"/>
+  	<input type="text" class="textInput wh500 {$field.validate}" name="{$field.name}" value="{$data[$field['name']]}"/>
   </switch>
   </dd>
 </dl>

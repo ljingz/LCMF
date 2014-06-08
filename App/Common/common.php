@@ -34,12 +34,15 @@ function data(){
 /**
  * 默认参数过滤函数
  * */
-function requestFilterHandler($data){
-	if(is_array($data)){
-		return array_map("requestFilterHandler", $data);
-	}else{
-		return htmlspecialchars(trim($data));
-	}
+function requestFilterHandler(&$data){
+	$data = htmlspecialchars(trim($data));
+}
+
+/**
+ * 参数过滤还原函数
+ * */
+function requestFilterDecode($data){
+	return htmlspecialchars_decode($data);
 }
 
 /**

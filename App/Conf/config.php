@@ -42,7 +42,7 @@ return array(
 	'UPLOAD_ALLOW_EXTS'        => array('png', 'gif', 'jpg', 'jpeg', 'tmp', 'doc', 'docx', 'xls', 'xlsx'),
 	
 	//参数过滤函数
-	'DEFAULT_FILTER'           => 'requestFilterHandler',
+	'VAR_FILTERS'              => 'requestFilterHandler',
 	
 	//扩展配置
 	'LOAD_EXT_CONFIG'          => MODULE_NAME.'/config,rbac',
