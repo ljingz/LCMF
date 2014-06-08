@@ -5,6 +5,12 @@
 .wh10 {width: 10px;}
 .wh15 {width: 15px;}
 .wh20 {width: 20px;}
+.wh50 {width: 50px;}
+.wh100 {width: 00px;}
+.wh200 {width: 200px;}
+.wh300 {width: 300px;}
+.wh400 {width: 400px;}
+.wh500 {width: 500px;}
 .whaotu {width: auto;}
 
 .ml5 {margin-left: 5px;}
@@ -54,6 +60,10 @@
 }
 .btnUp:hover, .btnDown:hover {text-decoration: none;}
 
+#header .nav li.first {
+	background: none;
+}
+
 .pageFormContent input, .pageFormContent textarea, .pageFormContent select {
 	margin-left: 0;
 	vertical-align: middle;
@@ -61,8 +71,4 @@
 
 .pageFormContent fieldHtml {
 	display: none;
-}
-
-#header .nav li.first {
-	background: none;
 }
