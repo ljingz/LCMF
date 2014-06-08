@@ -2,7 +2,7 @@
 return array(
 	'APP_STATUS'               => 'debug',
 	'APP_GROUP_LIST'           => 'Admin,Home',
-	
+
 	//默认分组
 	'DEFAULT_GROUP'            => 'Home',
 
@@ -36,10 +36,6 @@ return array(
 		'__PAGE__TITLE__'      => 'LCMF'
 	),
 	
-	//分页配置
-	'VAR_PAGE'                 => 'pageNum',
-	'NUM_PER_PAGE'             => 20,
-	
 	//上传配置
 	'UPLOAD_PATH'              => '/upload',
 	'UPLOAD_MAX_SIZE'          => 2,
@@ -49,7 +45,7 @@ return array(
 	'DEFAULT_FILTER'           => 'requestFilterHandler',
 	
 	//扩展配置
-	'LOAD_EXT_CONFIG'          => 'rbac',
+	'LOAD_EXT_CONFIG'          => MODULE_NAME.'/config,rbac',
 	
 	//动态载入
 	'LOAD_EXT_FILE'            => 'functions'

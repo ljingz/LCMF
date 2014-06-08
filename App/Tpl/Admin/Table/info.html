@@ -54,7 +54,7 @@
       <dd>
       	<select name="table[type]">
       	<volist name=":data('table','type')" id="value">
-					<option value="{$key}" <eq name="data.type" value="$key">selected</eq>>{$value}</option>
+					<option value="{$key}" <eq name="data.type" value="$key">selected</eq>>{$value.name}</option>
 				</volist>
 				</select>
       </dd>

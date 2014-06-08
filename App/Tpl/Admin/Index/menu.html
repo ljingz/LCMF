@@ -1,15 +1,32 @@
+<php>
+	function buildHtml($columns){
+		foreach($columns as $column){
+			$html .= '<li>';
+			if(!empty($column["table"])){
+				$html .= '<a href="__GROUP__/'.data("table", "type", $column["table"]["type"], "module").'/index/columnid/'.$column["columnid"].'" target="navTab" rel="Data-'.$column["columnid"].'">';
+			}else{
+				$html .= '<a>';
+			}
+			$html	.= $column["name"];
+			$html	.= '</a>';
+			if(!empty($column["child"])){
+					$html .= '<ul>';
+					$html .= buildHtml($column["child"]);
+					$html .= '</ul>';
+			}
+			$html .= '</li>';
+		}
+		return $html;
+	}
+</php>
+
 <div class="accordion" fillSpace="sidebar">
   <div class="accordionHeader">
     <h2><span>Folder</span>信息管理</h2>
   </div>
   <div class="accordionContent">
     <ul class="tree treeFolder">
-      <li><a href="tabsPage.html" target="navTab">新闻中心</a>
-        <ul>
-          <li><a href="main.html" target="navTab" rel="main">学校新闻</a></li>
-          <li><a href="http://www.baidu.com" target="navTab" rel="page1">社会新闻</a></li>
-        </ul>
-      </li>
+      {:buildHtml(D("Column")->getTree())}
     </ul>
   </div>
   <!-- end accordionContent -->
@@ -26,7 +43,7 @@
     <h2><span>Folder</span>系统设置</h2>
   </div>
   <div class="accordionContent">
-    <ul class="tree">
+    <ul class="tree treeFolder">
       <li><a href="__GROUP__/Admin" target="navTab" rel="Admin">用户管理</a></li>
       <li><a href="__GROUP__/Table" target="navTab" rel="Table">模型管理</a></li>
       <li><a href="__GROUP__/Column" target="navTab" rel="Column">栏目管理</a></li>

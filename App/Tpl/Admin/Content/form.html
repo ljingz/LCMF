@@ -1,0 +1,40 @@
+<style type="text/css">
+	.pageFormField dd {
+		width: 85%;
+	}
+	.pageFormField dd .editor {
+		height: 300px;
+	}
+</style>
+<volist name="table.field" id="field">
+<dl>
+  <dt>{$field.title}：</dt>
+  <dd>
+  <switch name="field.element">
+  <case value="textarea">
+		<textarea class="textInput wh500 {$field.validate}" name="{$field.name}" rows="5"></textarea>
+  </case>
+  <case value="date">
+  	
+  </case>
+  <case value="datetime">
+  	
+  </case>
+  <case value="file">
+  	
+  </case>
+  <case value="editor">
+  	<php>$rand_string = rand_string(32, 0);</php>
+    <script id="{$rand_string}" name="content" class="editor {$field.validate}" type="text/plain">
+    	
+    </script>
+    <script type="text/javascript">
+        var ue = UE.getEditor('{$rand_string}');
+    </script>
+  </case>
+  <default />
+  	<input type="text" class="textInput wh500 {$field.validate}" name="{$field.name}"/>
+  </switch>
+  </dd>
+</dl>
+</volist>

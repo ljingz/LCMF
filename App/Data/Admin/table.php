@@ -3,9 +3,18 @@ if(!defined('APP_NAME')) exit('Access Denied');
 
 return array(
 	"type"=>array(
-		"list"=>"文字列表",
-		"image"=>"图片列表",
-		"content"=>"文字内容"
+		"list"=>array(
+			"name"=>"文字列表",
+			"module"=>"List"
+		),
+		"image"=>array(
+			"name"=>"图片列表",
+			"module"=>"List"
+		),
+		"content"=>array(
+			"name"=>"文字内容",
+			"module"=>"Content"
+		)
 	),
 	"action"=>array(
 		"add"=>"添加",
@@ -27,7 +36,11 @@ return array(
 			),
 			"date"=>array(
 				"name"=>"日期",
-				"type"=>"int(11)"
+				"type"=>"date"
+			),
+			"datetime"=>array(
+				"name"=>"时间",
+				"type"=>"datetime"
 			),
 			"file"=>array(
 				"name"=>"文件",

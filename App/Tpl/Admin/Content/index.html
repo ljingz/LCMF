@@ -1,0 +1,10 @@
+<extend name="./base_form" />
+
+<block name="content">
+	<notempty name="data">
+  <input type="hidden" name="adminid" value="{$data.adminid}"/>
+  </notempty>
+  <div class="pageFormContent pageFormField nowrap" layoutH="67">
+    <include file="form" />
+  </div>
+</block>
