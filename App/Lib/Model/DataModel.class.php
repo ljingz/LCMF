@@ -43,17 +43,27 @@ class DataModel extends BaseModel {
 		}
 	}
 	
+	public function getPageList($columnid, $options = array()){
+		$Column = D("Column");
+		$options["query"]["columnid"] = $columnid;
+		$list = parent::getPageList($options);
+		$table = $Column->getTable($columnid);
+		$Model = D($table["name"]);
+		foreach($list["datas"] as &$data){
+			$data = array_merge($Model->find($data["dataid"]), $data);
+		}
+		return $list;
+	}
+	
 	public function getInfo($columnid, $dataid = null){
 		$Column = D("Column");
 		if(!empty($dataid)){
 			$this->where(array("dataid"=>$dataid));
 		}
 		$data = $this->where(array("columnid"=>$columnid))->find();
-		
 		$table = $Column->getTable($columnid);
 		$Model = D($table["name"]);
 		$data = array_merge($Model->find($data["dataid"]), $data);
-		
 		return $data;
 	}
 }

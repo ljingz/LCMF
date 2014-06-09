@@ -9,8 +9,8 @@ class AdminAction extends BaseAction {
 		if(!empty($username)){
 			$options["query"]["username"] = array("like", sprintf("%%%s%%", $username));
 		}
-		$data = $Admin->getPageList($options);
-		$this->assign($data);
+		$list = $Admin->getPageList($options);
+		$this->assign($list);
 		$this->display();
 	}
 	

@@ -43,6 +43,7 @@ return array(
 	
 	//参数过滤函数
 	'VAR_FILTERS'              => 'requestFilterHandler',
+	'DEFAULT_FILTER'           => '',
 	
 	//扩展配置
 	'LOAD_EXT_CONFIG'          => MODULE_NAME.'/config,rbac',
