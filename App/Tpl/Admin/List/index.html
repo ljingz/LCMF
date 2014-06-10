@@ -18,7 +18,7 @@
         	<volist name="table.field" id="field">
 					<eq name="field.list" value="1">
 					<td class="pr5">
-						{$field.title}：<input type="text" name="{$field.name}" value="{$_GET[$field['name']]}"/>
+						{$field.title}：<input type="text" size="15" name="{$field.name}" value="{$_GET[$field['name']]}"/>
           </td>
 					</eq>
 					</volist>
@@ -36,15 +36,21 @@
 	<div class="panelBar">
 		<ul class="toolBar">
 			<li><a class="add" href="__URL__/add/columnid/{$Think.get.columnid}" target="navTab" rel="Data-{$Think.get.columnid}-add" title="添加信息"><span>添加</span></a></li>
-			<li><a class="delete" href="__URL__/delete/columnid/{$Think.get.columnid}/dataid/{dataid}" target="ajaxTodo" title="确定要删除吗?"><span>删除</span></a></li>
+			<li><a class="delete" href="__URL__/delete/columnid/{$Think.get.columnid}" target="selectedTodo" rel="dataid[]" title="确定要删除吗?"><span>删除</span></a></li>
 			<li><a class="edit" href="__URL__/edit/columnid/{$Think.get.columnid}/dataid/{dataid}" target="navTab" rel="Data-{$Think.get.columnid}-edit" title="编辑信息"><span>编辑</span></a></li>
+			<li><a class="lock" href="__URL__/delete/columnid/{$Think.get.columnid}" target="selectedTodo" rel="dataid[]"><span>锁定</span></a></li>
+			<li><a class="canclelock" href="__URL__/delete/columnid/{$Think.get.columnid}" target="selectedTodo" rel="dataid[]"><span>取消锁定</span></a></li>
+			<li><a class="recommend" href="__URL__/delete/columnid/{$Think.get.columnid}" target="selectedTodo" rel="dataid[]"><span>推荐</span></a></li>
+			<li><a class="canclerecommend" href="__URL__/delete/columnid/{$Think.get.columnid}" target="selectedTodo" rel="dataid[]"><span>取消推荐</span></a></li>
+			<li><a class="headline" href="__URL__/delete/columnid/{$Think.get.columnid}" target="selectedTodo" rel="dataid[]"><span>头条</span></a></li>
+			<li><a class="cancleheadline" href="__URL__/delete/columnid/{$Think.get.columnid}" target="selectedTodo" rel="dataid[]"><span>取消头条</span></a></li>
 		</ul>
 	</div>
 
 	<table class="table" width="100%" layoutH="113">
 		<thead>
 			<tr>
-				<th width="50">ID</th>
+				<th width="70"><label><input type="checkbox" group="dataid[]" class="checkboxCtrl"> ID</label></th>
 				<volist name="table.field" id="field">
 				<eq name="field.list" value="1">
 				<th>{$field.title}</th>
@@ -56,7 +62,7 @@
 		<tbody>
     	<volist name="datas" id="vo">
 			<tr target="dataid" rel="{$vo.dataid}">
-      	<td>{$vo.dataid}</td>
+      	<td><label><input name="dataid[]" value="{$vo.dataid}" type="checkbox"> {$vo.dataid}</label></td>
 				<volist name="table.field" id="field">
 				<eq name="field.list" value="1">
 				<td>{$vo[$field["name"]]}</td>

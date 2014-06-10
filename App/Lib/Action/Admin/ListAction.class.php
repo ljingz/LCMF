@@ -74,7 +74,7 @@ class ListAction extends BaseAction {
 	
 	public function delete($columnid, $dataid){
 		$Data = D("Data");
-		$query = array("columnid"=>$columnid, "dataid"=>$dataid);
+		$query = array("columnid"=>$columnid, "dataid"=>array("in", $dataid));
 		if($Data->where($query)->delete() === false){
 			$this->error("删除信息失败");
 		}else{

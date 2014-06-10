@@ -45,13 +45,11 @@ class DataModel extends BaseModel {
 	
 	public function getPageList($columnid, $options = array()){
 		$Column = D("Column");
-		$options["query"]["columnid"] = $columnid;
-		$list = parent::getPageList($options);
 		$table = $Column->getTable($columnid);
-		$Model = D($table["name"]);
-		foreach($list["datas"] as &$data){
-			$data = array_merge($Model->find($data["dataid"]), $data);
-		}
+		$options["alias"] = "d";
+		$options["join"] = "__".strtoupper($table["name"])."__ t USING(dataid)";
+		$options["query"]["d.columnid"] = $columnid;
+		$list = parent::getPageList($options);
 		return $list;
 	}
 	

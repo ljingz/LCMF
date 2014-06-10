@@ -39,7 +39,7 @@
 .pr20 {padding-right: 20px;}
 
 .btnUp {
-	background: url(../default/images/button/up.png) center top no-repeat ;
+	background: url(../default/images/button/up.png) no-repeat;
 	display:block;
 	width: 22px;
 	height: 20px;
@@ -49,7 +49,7 @@
 	margin-right: 3px;
 }
 .btnDown {
-	background: url(../default/images/button/down.png) center top no-repeat ;
+	background: url(../default/images/button/down.png) no-repeat;
 	display:block;
 	width: 22px;
 	height: 20px;
@@ -71,4 +71,37 @@
 
 .pageFormContent fieldHtml {
 	display: none;
+}
+
+.pageContent input, .pageContent textarea, .pageContent select {
+	vertical-align: middle;
+}
+
+
+.panelBar .toolBar a.add span {
+	background: url(../default/images/grid/add.png) left no-repeat;
+}
+.panelBar .toolBar a.edit span {
+	background: url(../default/images/grid/edit.png) left no-repeat;
+}
+.panelBar .toolBar a.delete span {
+	background: url(../default/images/grid/delete.png) left no-repeat;
+}
+.panelBar .toolBar a.lock span {
+	background: url(../default/images/grid/lock.png) left no-repeat;
+}
+.panelBar .toolBar a.canclelock span {
+	background: url(../default/images/grid/canclelock.png) left no-repeat;
+}
+.panelBar .toolBar a.recommend span {
+	background: url(../default/images/grid/recommend.png) left no-repeat;
+}
+.panelBar .toolBar a.canclerecommend span {
+	background: url(../default/images/grid/canclerecommend.png) left no-repeat;
+}
+.panelBar .toolBar a.headline span {
+	background: url(../default/images/grid/headline.png) left no-repeat;
+}
+.panelBar .toolBar a.cancleheadline span {
+	background: url(../default/images/grid/cancleheadline.png) left no-repeat;
 }

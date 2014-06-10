@@ -38,7 +38,21 @@ class BaseModel extends Model {
 		}
 	}
 	
-	public function getList($options = array()){
+	protected function parse($options){
+		if(!empty($options["alias"])){
+			$this->alias($options["alias"]);
+		}
+		if(!empty($options["join"])){
+			if(!is_array($options["join"])){
+				$options["join"] = array($options["join"]);
+			}
+			foreach($options["join"] as $join){
+				$this->join($join);
+			}
+		}
+		if(!empty($options["query"])){
+			$this->where($options["query"]);
+		}
 		if(!empty($options["order"])){
 			$this->order($options["order"]);
 		}else{
@@ -47,14 +61,18 @@ class BaseModel extends Model {
 			}
 			$this->order($this->_defaults["order"]);
 		}
-		$datas = $this->where($options["query"])
+		return $this;
+	}
+	
+	public function getList($options = array()){
+		$datas = $this->parse($options)
 					  ->select();
 		return $datas;
 	}
 	
 	public function getPageList($options = array()){
 		import("ORG.Util.Page");
-		$count = $this->where($options["query"])->count();
+		$count = $this->parse($options)->count();
 		$Page = new Page($count, C("NUM_PER_PAGE"));
 		$datas = $this->limit($Page->firstRow, $Page->listRows)
 					  ->getList($options);
