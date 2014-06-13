@@ -35,15 +35,27 @@
 <block name="pageContent">
 	<div class="panelBar">
 		<ul class="toolBar">
+			<php>if(in_array("add", $table["action"])){</php>
 			<li><a class="add" href="__URL__/add/columnid/{$Think.get.columnid}" target="navTab" rel="Data-{$Think.get.columnid}-add" title="添加信息"><span>添加</span></a></li>
+			<php>}</php>
+			<php>if(in_array("delete", $table["action"])){</php>
 			<li><a class="delete" href="__URL__/delete/columnid/{$Think.get.columnid}" target="selectedTodo" rel="dataid[]" title="确定要删除吗?"><span>删除</span></a></li>
+			<php>}</php>
+			<php>if(in_array("edit", $table["action"])){</php>
 			<li><a class="edit" href="__URL__/edit/columnid/{$Think.get.columnid}/dataid/{dataid}" target="navTab" rel="Data-{$Think.get.columnid}-edit" title="编辑信息"><span>编辑</span></a></li>
-			<li><a class="lock" href="__URL__/delete/columnid/{$Think.get.columnid}" target="selectedTodo" rel="dataid[]"><span>锁定</span></a></li>
-			<li><a class="canclelock" href="__URL__/delete/columnid/{$Think.get.columnid}" target="selectedTodo" rel="dataid[]"><span>取消锁定</span></a></li>
-			<li><a class="recommend" href="__URL__/delete/columnid/{$Think.get.columnid}" target="selectedTodo" rel="dataid[]"><span>推荐</span></a></li>
-			<li><a class="canclerecommend" href="__URL__/delete/columnid/{$Think.get.columnid}" target="selectedTodo" rel="dataid[]"><span>取消推荐</span></a></li>
-			<li><a class="headline" href="__URL__/delete/columnid/{$Think.get.columnid}" target="selectedTodo" rel="dataid[]"><span>头条</span></a></li>
-			<li><a class="cancleheadline" href="__URL__/delete/columnid/{$Think.get.columnid}" target="selectedTodo" rel="dataid[]"><span>取消头条</span></a></li>
+			<php>}</php>
+			<php>if(in_array("enable", $table["action"])){</php>
+			<li><a class="lock" href="__URL__/enable/columnid/{$Think.get.columnid}/value/0" target="selectedTodo" rel="dataid[]" title="锁定"><span>锁定</span></a></li>
+			<li><a class="canclelock" href="__URL__/enable/columnid/{$Think.get.columnid}/value/1" target="selectedTodo" rel="dataid[]" title="取消锁定"><span>取消锁定</span></a></li>
+			<php>}</php>
+			<php>if(in_array("recommend", $table["action"])){</php>
+			<li><a class="recommend" href="__URL__/recommend/columnid/{$Think.get.columnid}/value/1" target="selectedTodo" rel="dataid[]" title="推荐"><span>推荐</span></a></li>
+			<li><a class="canclerecommend" href="__URL__/recommend/columnid/{$Think.get.columnid}/value/0" target="selectedTodo" rel="dataid[]" title="取消推荐"><span>取消推荐</span></a></li>
+			<php>}</php>
+			<php>if(in_array("headline", $table["action"])){</php>
+			<li><a class="headline" href="__URL__/headline/columnid/{$Think.get.columnid}/value/1" target="selectedTodo" rel="dataid[]" title="头条"><span>头条</span></a></li>
+			<li><a class="cancleheadline" href="__URL__/headline/columnid/{$Think.get.columnid}/value/0" target="selectedTodo" rel="dataid[]" title="取消头条"><span>取消头条</span></a></li>
+			<php>}</php>
 		</ul>
 	</div>
 
@@ -63,9 +75,16 @@
     	<volist name="datas" id="vo">
 			<tr target="dataid" rel="{$vo.dataid}">
       	<td><label><input name="dataid[]" value="{$vo.dataid}" type="checkbox"> {$vo.dataid}</label></td>
-				<volist name="table.field" id="field">
+				<volist name="table.field" key="index" id="field">
 				<eq name="field.list" value="1">
-				<td>{$vo[$field["name"]]}</td>
+				<td>
+					<eq name="index" value="1">
+						<eq name="vo.enable" value="0"><a class="lock" title="锁定">锁定</a></eq>
+						<eq name="vo.recommend" value="1"><a class="recommend" title="推荐">推荐</a></eq>
+						<eq name="vo.headline" value="1"><a class="headline" title="头条">头条</a></eq>
+					</eq>
+					{$vo[$field["name"]]}
+				</td>
 				</eq>
 				</volist>
 				<td>{$vo.createtime|date='Y-m-d H:i:s',###}</td>

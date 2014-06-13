@@ -43,6 +43,17 @@ class DataModel extends BaseModel {
 		}
 	}
 	
+	public function setValue($columnid, $dataid, $data = array()){
+		try{
+			$result = $this->where(array("columnid"=>$columnid, "dataid"=>array("in", $dataid)))->save($data);
+			if($result === false){
+				throw new Exception("设置字段值失败");
+			}
+		}catch(Exception $ex){
+			throw new Exception($ex->getMessage());
+		}
+	}
+	
 	public function getPageList($columnid, $options = array()){
 		$Column = D("Column");
 		$table = $Column->getTable($columnid);

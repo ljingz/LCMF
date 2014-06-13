@@ -105,3 +105,31 @@
 .panelBar .toolBar a.cancleheadline span {
 	background: url(../default/images/grid/cancleheadline.png) left no-repeat;
 }
+
+.grid .gridTbody a.lock {
+	background: url(../default/images/grid/lock.png) left no-repeat;
+	display: block;
+	width: 21px;
+	height: 21px;
+	text-indent: -1000px;
+	overflow: hidden;
+	float: left;
+}
+.grid .gridTbody a.recommend {
+	background: url(../default/images/grid/recommend.png) left no-repeat;
+	display: block;
+	width: 21px;
+	height: 21px;
+	text-indent: -1000px;
+	overflow: hidden;
+	float: left;
+}
+.grid .gridTbody a.headline {
+	background: url(../default/images/grid/headline.png) left no-repeat;
+	display: block;
+	width: 21px;
+	height: 21px;
+	text-indent: -1000px;
+	overflow: hidden;
+	float: left;
+}

@@ -86,4 +86,26 @@ class ListAction extends BaseAction {
 			));
 		}
 	}
+	
+	public function _empty($name){
+		$Data = D("Data");
+		$columnid = $this->_get("columnid");
+		$value = $this->_get("value");
+		$dataid = $this->_post("dataid");
+		if(array_key_exists($name, data("table", "action"))){
+			try{
+				$Data->setValue($columnid, $dataid, array(
+					$name=>$value
+				));
+				$this->success("操作信息成功", null, array(
+					"navTabId"=>implode("-", array(
+						"Data",
+						$columnid
+					))
+				));
+			}catch(Exception $ex){
+				$this->error($ex->getMessage());
+			}
+		}
+	}
 }

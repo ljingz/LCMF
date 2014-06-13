@@ -20,7 +20,7 @@ return array(
 		"add"=>"添加",
 		"delete"=>"删除",
 		"edit"=>"编辑",
-		"enable"=>"启用",
+		"enable"=>"锁定",
 		"recommend"=>"推荐",
 		"headline"=>"头条"
 	),
