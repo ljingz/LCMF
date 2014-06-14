@@ -46,4 +46,3 @@ return array(
 	//动态载入
 	'LOAD_EXT_FILE'            => 'functions'
 );
-?>

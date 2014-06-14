@@ -1,7 +1,7 @@
 <?php
 return array(
 	//上传配置
-	'UPLOAD_PATH'              => '/upload',
+	'UPLOAD_PATH'              => 'static/attachment/default/',
 	'UPLOAD_MAX_SIZE'          => 2,
 	'UPLOAD_ALLOW_TYPE'        => array(
 		'IMAGE'=>array(
@@ -22,4 +22,3 @@ return array(
 		)
 	)
 );
-?>

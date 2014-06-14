@@ -91,7 +91,7 @@ class UploadFile {//类定义开始
         $filename = $file['savepath'].$file['savename'];
         if(!$this->uploadReplace && is_file($filename)) {
             // 不覆盖同名文件
-            $this->error	=	'文件已经存在！'.$filename;
+            $this->error	=	'文件已经存在';
             return false;
         }
         // 如果是图像文件 检测文件格式
@@ -103,7 +103,7 @@ class UploadFile {//类定义开始
             }
         }
         if(!move_uploaded_file($file['tmp_name'], $this->autoCharset($filename,'utf-8','gbk'))) {
-            $this->error = '文件上传保存错误！';
+            $this->error = '上传保存错误';
             return false;
         }
         if($this->thumb && in_array(strtolower($file['extension']),array('gif','jpg','jpeg','bmp','png'))) {
@@ -165,13 +165,13 @@ class UploadFile {//类定义开始
             }else{
                 // 尝试创建目录
                 if(!mkdir($savePath)){
-                    $this->error  =  '上传目录'.$savePath.'不存在';
+                    $this->error  =  '上传目录不存在';
                     return false;
                 }
             }
         }else {
             if(!is_writeable($savePath)) {
-                $this->error  =  '上传目录'.$savePath.'不可写';
+                $this->error  =  '上传目录不可写';
                 return false;
             }
         }
@@ -232,12 +232,12 @@ class UploadFile {//类定义开始
         if(!is_dir($savePath)) {
             // 尝试创建目录
             if(!mkdir($savePath,0777,true)){
-                $this->error  =  '上传目录'.$savePath.'不存在';
+                $this->error  =  '上传目录不存在';
                 return false;
             }
         }else {
             if(!is_writeable($savePath)) {
-                $this->error  =  '上传目录'.$savePath.'不可写';
+                $this->error  =  '上传目录不可写';
                 return false;
             }
         }
@@ -413,24 +413,24 @@ class UploadFile {//类定义开始
         //文件上传成功，进行自定义规则检查
         //检查文件大小
         if(!$this->checkSize($file['size'])) {
-            $this->error = '上传文件大小不符！';
+            $this->error = '文件超出限制';
             return false;
         }
 
         //检查文件Mime类型
         if(!$this->checkType($file['type'])) {
-            $this->error = '上传文件MIME类型不允许！';
+            $this->error = '文件MIME类型不允许';
             return false;
         }
         //检查文件类型
         if(!$this->checkExt($file['extension'])) {
-            $this->error ='上传文件类型不允许';
+            $this->error ='文件类型不允许';
             return false;
         }
 
         //检查是否合法上传
         if(!$this->checkUpload($file['tmp_name'])) {
-            $this->error = '非法上传文件！';
+            $this->error = '非法上传文件';
             return false;
         }
         return true;

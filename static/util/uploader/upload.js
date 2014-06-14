@@ -288,8 +288,6 @@ LCMFUpload.prototype.init = function() {
           } else if ( cur === 'progress' ) {
               $info.remove();
               $prgress.css('display', 'block');
-          } else if ( cur === 'complete' ) {
-              $li.append( '<span class="success"></span>' );
           }
 
           $li.removeClass( 'state-' + prev ).addClass( 'state-' + cur );
@@ -357,7 +355,7 @@ LCMFUpload.prototype.init = function() {
 
   // 负责view的销毁
   function removeFile( file ) {
-      var $li = $('#'+file.id);
+      var $li = $('#' + file.id);
 
       delete percentages[ file.id ];
       updateTotalProgress();
@@ -476,7 +474,7 @@ LCMFUpload.prototype.init = function() {
   }
 
   uploader.onUploadProgress = function( file, percentage ) {
-      var $li = $('#'+file.id),
+      var $li = $('#' + file.id),
           $percent = $li.find('.progress span');
 
       $percent.css( 'width', percentage * 100 + '%' );
@@ -510,6 +508,20 @@ LCMFUpload.prototype.init = function() {
       updateTotalProgress();
 
   };
+  
+  uploader.onUploadSuccess = function( file, response ) {
+  	var $li = $('#' + file.id);
+  	
+  	$li.find("span.success,p.error").remove();
+  	
+  	if( response["status"] == "1" ){
+  			$success = $( '<span class="success"></span>' );
+  			$success.html('<input type="hidden" name="file[]" value=\'' + JSON.stringify(response.info) + '\'>').appendTo( $li );
+  	} else {
+  			$error = $( '<p class="error"></p>' );
+  			$error.attr("title", response["info"]).html(response["info"] || "未知错误").appendTo( $li );
+  	}
+  }
 
   uploader.on( 'all', function( type ) {
       var stats;
