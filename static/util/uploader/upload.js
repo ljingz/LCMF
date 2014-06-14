@@ -1,11 +1,12 @@
-function LCMFUpload(wrap, options){
+function LCMFUpload(uploadWrap, fieldName, options){
+	this.uploadWrap = uploadWrap || "#uploader";
+	this.fieldName = fieldName || "file";
 	this.option = $.extend({
-			wrap: wrap || "#uploader",
 			pick: {
-          id: wrap + ' .filePicker',
+          id: this.uploadWrap + ' .filePicker',
           innerHTML: '点击选择文件'
       },
-      dnd: wrap + ' .dndArea',
+      dnd: this.uploadWrap + ' .dndArea',
       swf: LCMF.STATIC + '/util/uploader/Uploader.swf',
       server: LCMF.UPLOAD,
 			accept: {
@@ -20,10 +21,12 @@ function LCMFUpload(wrap, options){
 }
 
 LCMFUpload.prototype.init = function() {
+	var uploadWrap = this.uploadWrap;
+	var fieldName = this.fieldName;
 	var option = this.option;
 	
 	// 当domReady的时候开始初始化
-  var $wrap = $(option.wrap),
+  var $wrap = $(uploadWrap),
   		// 添加“添加文件”的按钮
   		$pick2 = $wrap.find( '.filePicker2' ),
       // 图片容器
@@ -162,9 +165,9 @@ LCMFUpload.prototype.init = function() {
   });
   
   // 添加“添加文件”的按钮
-  if(option.fileNumLimit > 1 && $(option.wrap + ' .filePicker2')){
+  if(option.fileNumLimit > 1 && $(uploadWrap + ' .filePicker2')){
   	  uploader.addButton({
-		      id: option.wrap + ' .filePicker2',
+		      id: uploadWrap + ' .filePicker2',
 		      label: '继续添加'
 		  });
   }
@@ -516,7 +519,7 @@ LCMFUpload.prototype.init = function() {
   	
   	if( response["status"] == "1" ){
   			$success = $( '<span class="success"></span>' );
-  			$success.html('<input type="hidden" name="file[]" value=\'' + JSON.stringify(response.info) + '\'>').appendTo( $li );
+  			$success.html('<input type="hidden" name="' + fieldName + '" value=\'' + JSON.stringify(response.info) + '\'>').appendTo( $li );
   	} else {
   			$error = $( '<p class="error"></p>' );
   			$error.attr("title", response["info"]).html(response["info"] || "未知错误").appendTo( $li );
