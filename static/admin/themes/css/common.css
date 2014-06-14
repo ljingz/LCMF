@@ -67,6 +67,7 @@
 .pageFormContent input, .pageFormContent textarea, .pageFormContent select {
 	margin-left: 0;
 	vertical-align: middle;
+	border: 1px solid #D4D4D4;
 }
 
 .pageFormContent fieldHtml {

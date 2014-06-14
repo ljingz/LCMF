@@ -546,8 +546,17 @@ function C($name=null, $value=null) {
         // 二维数组设置和获取支持
         $name = explode('.', $name);
         $name[0]   =  strtolower($name[0]);
-        if (is_null($value))
-            return isset($_config[$name[0]][$name[1]]) ? $_config[$name[0]][$name[1]] : null;
+    	if (is_null($value)){
+    		$_tmp = $_config;
+        	foreach($name as $_name){
+        		if (isset($_tmp[$_name])){
+        			$_tmp = $_tmp[$_name];
+        		}else{
+        			return null;
+        		}
+        	}
+        	return $_tmp;
+        }
         $_config[$name[0]][$name[1]] = $value;
         return;
     }

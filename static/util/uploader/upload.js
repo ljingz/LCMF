@@ -1,12 +1,31 @@
-function LCMFUpload(options){
-	this.wrap = options["wrap"]
+function LCMFUpload(wrap, options){
+	this.option = $.extend({
+			wrap: wrap || "#uploader",
+			pick: {
+          id: wrap + ' .filePicker',
+          innerHTML: '点击选择文件'
+      },
+      dnd: wrap + ' .dndArea',
+      swf: LCMF.STATIC + '/util/uploader/Uploader.swf',
+      server: LCMF.UPLOAD,
+			accept: {
+	      title: 'Images',
+	      extensions: 'png,gif,jpg,jpeg,bmp',
+	      mimeTypes: 'image/*'
+      },
+      fileNumLimit: 50,
+      fileSizeLimit: 512,
+      fileSingleSizeLimit: 20
+	}, options);
 }
 
 LCMFUpload.prototype.init = function() {
-	var option = this;
+	var option = this.option;
 	
 	// 当domReady的时候开始初始化
   var $wrap = $(option.wrap),
+  		// 添加“添加文件”的按钮
+  		$pick2 = $wrap.find( '.filePicker2' ),
       // 图片容器
       $queue = $( '<ul class="filelist"></ul>' ).appendTo( $wrap.find( '.queueList' ) ),
       // 状态栏，包括进度和控制按钮
@@ -128,31 +147,27 @@ LCMFUpload.prototype.init = function() {
 
   // 实例化
   uploader = WebUploader.create({
-      pick: {
-          id: option.wrap + ' .filePicker',
-          label: '点击选择文件'
-      },
-      dnd: option.wrap + ' .dndArea',
-      swf: LCMF.STATIC + '/util/uploader/Uploader.swf',
+      pick: option.pick,
+      dnd: option.dnd,
+      swf: option.swf,
+      server: option.server,
+			accept: option.accept,
+      fileNumLimit: option.fileNumLimit,
+      fileSizeLimit: option.fileSizeLimit * 1024 * 1024,
+      fileSingleSizeLimit: option.fileSingleSizeLimit * 1024 * 1024,
       chunked: false,
       chunkSize: 512 * 1024,
-      server: LCMF.UPLOAD,
-      // server: 'http://liaoxuezhi.fe.baidu.com/webupload/fileupload.php',
-      // server: 'http://www.2betop.net/fileupload.php',
-      //
-
-      // accept: {
-      //     title: 'Images',
-      //     extensions: 'gif,jpg,jpeg,bmp,png',
-      //     mimeTypes: 'image/*'
-      // },
-
       // 禁掉全局的拖拽功能。这样不会出现图片拖进页面的时候，把图片打开。
-      disableGlobalDnd: true,
-      fileNumLimit: 300,
-      fileSizeLimit: 200 * 1024 * 1024,    // 200 M
-      fileSingleSizeLimit: 50 * 1024 * 1024    // 50 M
+      disableGlobalDnd: true
   });
+  
+  // 添加“添加文件”的按钮
+  if(option.fileNumLimit > 1 && $(option.wrap + ' .filePicker2')){
+  	  uploader.addButton({
+		      id: option.wrap + ' .filePicker2',
+		      label: '继续添加'
+		  });
+  }
 
   // 拖拽时不接受 js, txt 文件。
   uploader.on( 'dndAccept', function( items ) {
@@ -182,12 +197,6 @@ LCMFUpload.prototype.init = function() {
   //         return 0;
   //     });
   // });
-
-  // 添加“添加文件”的按钮，
-  uploader.addButton({
-      id: option.wrap + ' .filePicker2',
-      label: '继续添加'
-  });
 
   uploader.on('ready', function() {
       window.uploader = uploader;
@@ -220,7 +229,7 @@ LCMFUpload.prototype.init = function() {
                       break;
 
                   default:
-                      text = '上传失败，请重试';
+                      text = '上传失败';
                       break;
               }
 
@@ -266,14 +275,10 @@ LCMFUpload.prototype.init = function() {
       file.on('statuschange', function( cur, prev ) {
           if ( prev === 'progress' ) {
               $prgress.hide().width(0);
-          } else if ( prev === 'queued' ) {
-              $li.off( 'mouseenter mouseleave' );
-              $btns.remove();
           }
 
           // 成功
           if ( cur === 'error' || cur === 'invalid' ) {
-              console.log( file.statusText );
               showError( file.statusText );
               percentages[ file.id ][ 1 ] = 1;
           } else if ( cur === 'interrupt' ) {
@@ -382,23 +387,23 @@ LCMFUpload.prototype.init = function() {
       var text = '', stats;
 
       if ( state === 'ready' ) {
-          text = '选中' + fileCount + '张图片，共' +
-                  WebUploader.formatSize( fileSize ) + '。';
+          text = '选中' + fileCount + '个文件，共' +
+                  WebUploader.formatSize( fileSize );
       } else if ( state === 'confirm' ) {
           stats = uploader.getStats();
           if ( stats.uploadFailNum ) {
-              text = '已成功上传' + stats.successNum+ '张照片至XX相册，'+
-                  stats.uploadFailNum + '张照片上传失败，<a class="retry" href="#">重新上传</a>失败图片或<a class="ignore" href="#">忽略</a>'
+              text = '已成功上传' + stats.successNum+ '个文件，其中'+
+                  stats.uploadFailNum + '个上传失败，<a class="retry" href="#">重新上传</a>失败文件或<a class="ignore" href="#">忽略</a>'
           }
 
       } else {
           stats = uploader.getStats();
-          text = '共' + fileCount + '张（' +
+          text = '共' + fileCount + '个（' +
                   WebUploader.formatSize( fileSize )  +
-                  '），已上传' + stats.successNum + '张';
+                  '），已上传' + stats.successNum + '个';
 
           if ( stats.uploadFailNum ) {
-              text += '，失败' + stats.uploadFailNum + '张';
+              text += '，失败' + stats.uploadFailNum + '个';
           }
       }
 
@@ -426,14 +431,14 @@ LCMFUpload.prototype.init = function() {
 
           case 'ready':
               $placeHolder.addClass( 'element-invisible' );
-              $( '#filePicker2' ).removeClass( 'element-invisible');
+              $pick2.removeClass( 'element-invisible');
               $queue.show();
               $statusBar.removeClass('element-invisible');
               uploader.refresh();
               break;
 
           case 'uploading':
-              $( '#filePicker2' ).addClass( 'element-invisible' );
+              $pick2.addClass( 'element-invisible' );
               $progress.show();
               $upload.text( '暂停上传' );
               break;
@@ -456,12 +461,14 @@ LCMFUpload.prototype.init = function() {
           case 'finish':
               stats = uploader.getStats();
               if ( stats.successNum ) {
-                  alert( '上传成功' );
+		              //
               } else {
                   // 没有成功的图片，重设
                   state = 'done';
                   location.reload();
               }
+              $pick2.removeClass( 'element-invisible');
+		          $upload.removeClass( 'disabled' );
               break;
       }
 

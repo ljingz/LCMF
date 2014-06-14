@@ -1,0 +1,30 @@
+<php>$rand_string = rand_string(32, 0);</php>
+<div id="{$rand_string}" class="webuploader">
+    <div class="queueList">
+        <div class="dndArea placeholder">
+            <div class="filePicker"></div>
+            <center>或将文件拖到这里</center>
+        </div>
+    </div>
+    <div class="statusBar" style="display:none;">
+        <div class="progress">
+            <span class="text">0%</span>
+            <span class="percentage"></span>
+        </div><div class="info"></div>
+        <div class="btns">
+            <div class="uploadBtn">开始上传</div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+	var upload = new LCMFUpload("#{$rand_string}", {
+		accept: {
+      title: 'Files',
+      extensions: '{:implode(",",C("UPLOAD_ALLOW_TYPE.FILE.extension"))}',
+      mimeTypes: '{:implode(",",C("UPLOAD_ALLOW_TYPE.FILE.mimeType"))}'
+    },
+		fileNumLimit: 1,
+    fileSingleSizeLimit: {:C("UPLOAD_MAX_SIZE")}
+	});
+	upload.init();
+</script>

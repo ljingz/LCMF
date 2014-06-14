@@ -33,7 +33,7 @@
 }
 
 .webuploader .queueList {
-    border: 1px dashed #e6e6e6;
+    border: 1px solid #D4D4D4;
 }
 .webuploader .queueList.filled {
     padding: 17px;
@@ -53,25 +53,25 @@
 }
 
 .webuploader .placeholder {
-    min-height: 80px;
-    padding-top: 100px;
+    min-height: 60px;
+    padding-top: 80px;
     text-align: center;
-    background: url(images/image.png) center 10px no-repeat;
+    background: url(images/image.png) center top no-repeat;
     color: #cccccc;
-    font-size: 18px;
+    font-size: 14px;
     position: relative;
 }
 
 .webuploader .placeholder .webuploader-pick {
-    font-size: 18px;
+    font-size: 14px;
     background: #00b7ee;
     border-radius: 3px;
-    line-height: 44px;
-    padding: 0 30px;
+    line-height: 34px;
+    padding: 0 20px;
     *width: 120px;
     color: #fff;
     display: inline-block;
-    margin: 0 auto 20px auto;
+    margin: 0 auto 10px auto;
     cursor: pointer;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 }
@@ -234,8 +234,8 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    height: 28px;
-    line-height: 28px;
+    height: 14px;
+    line-height: 14px;
     width: 100%;
     z-index: 100;
 }
@@ -332,7 +332,7 @@
 
 .webuploader .statusBar .info {
     display: inline-block;
-    font-size: 14px;
+    font-size: 12px;
     color: #666666;
 }
 

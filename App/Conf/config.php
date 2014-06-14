@@ -36,17 +36,12 @@ return array(
 		'__PAGE__TITLE__'      => 'LCMF'
 	),
 	
-	//上传配置
-	'UPLOAD_PATH'              => '/upload',
-	'UPLOAD_MAX_SIZE'          => 2,
-	'UPLOAD_ALLOW_EXTS'        => array('png', 'gif', 'jpg', 'jpeg', 'tmp', 'doc', 'docx', 'xls', 'xlsx'),
-	
 	//参数过滤函数
 	'VAR_FILTERS'              => 'requestFilterHandler',
 	'DEFAULT_FILTER'           => '',
 	
 	//扩展配置
-	'LOAD_EXT_CONFIG'          => MODULE_NAME.'/config,rbac',
+	'LOAD_EXT_CONFIG'          => MODULE_NAME.'/config,rbac,upload',
 	
 	//动态载入
 	'LOAD_EXT_FILE'            => 'functions'
