@@ -1,7 +1,7 @@
 <?php
 return array(
 	'APP_STATUS'               => 'debug',
-	'APP_GROUP_LIST'           => 'Admin,Home',
+	'APP_GROUP_LIST'           => 'Admin,Home,Common',
 
 	//默认分组
 	'DEFAULT_GROUP'            => 'Home',

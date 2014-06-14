@@ -8,25 +8,28 @@
 <link href="__STATIC__/admin/themes/css/core.css" rel="stylesheet" type="text/css" media="screen"/>
 <link href="__STATIC__/admin/themes/css/print.css" rel="stylesheet" type="text/css" media="print"/>
 <link href="__STATIC__/admin/themes/css/common.css" rel="stylesheet" type="text/css" media="screen"/>
-<link href="__STATIC__/admin/uploadify/css/uploadify.css" rel="stylesheet" type="text/css" media="screen"/>
 <!--[if IE]>
 <link href="__STATIC__/admin/themes/css/ieHack.css" rel="stylesheet" type="text/css" media="screen"/>
 <![endif]-->
 <!--[if lte IE 9]>
 <script src="__STATIC__/admin/js/speedup.js" type="text/javascript"></script>
 <![endif]-->
+<link href="__STATIC__/util/uploader/webuploader.css" rel="stylesheet" type="text/css" media="screen">
 <script src="__STATIC__/admin/js/jquery-1.7.2.min.js" type="text/javascript"></script>
 <script src="__STATIC__/admin/js/jquery.cookie.js" type="text/javascript"></script>
 <script src="__STATIC__/admin/js/jquery.validate.js" type="text/javascript"></script>
 <script src="__STATIC__/admin/js/jquery.bgiframe.js" type="text/javascript"></script>
 <script src="__STATIC__/admin/uploadify/scripts/jquery.uploadify.min.js" type="text/javascript"></script>
-<script src="__STATIC__/common/ueditor/ueditor.config.js" type="text/javascript"></script>
-<script src="__STATIC__/common/ueditor/ueditor.all.min.js" type="text/javascript"></script>
 <script src="__STATIC__/admin/bin/dwz.min.js" type="text/javascript"></script>
 <script src="__STATIC__/admin/js/dwz.regional.zh.js" type="text/javascript"></script>
-<script src="__STATIC__/admin/js/common.js" type="text/javascript"></script>
-
 <script type="text/javascript">
+var LCMF = {
+	APP: "__APP__",
+	GROUP: "__GROUP__",
+	UPLOAD: "__ROOT__/index.php?s=/Common/Upload",
+	STATIC: "__STATIC__"
+}
+
 $(function(){
 	DWZ.init("__STATIC__/admin/dwz.frag.xml", {
 		loginUrl: "__GROUP__/Login/dialog",
@@ -103,5 +106,10 @@ $(function(){
 
 	<div id="footer">Copyright &copy; {:date("Y")} 技术支持:<a href="http://www.hzgrand.com" target="_new">杭州宏雅科技有限公司</a></div>
 
+<script src="__STATIC__/util/ueditor/ueditor.config.js" type="text/javascript"></script>
+<script src="__STATIC__/util/ueditor/ueditor.all.min.js" type="text/javascript"></script>
+<script src="__STATIC__/util/uploader/webuploader.js" type="text/javascript"></script>
+<script src="__STATIC__/util/uploader/upload.js" type="text/javascript"></script>
+<script src="__STATIC__/admin/js/common.js" type="text/javascript"></script>
 </body>
 </html>

@@ -46,6 +46,14 @@ return array(
 				"name"=>"文件",
 				"type"=>"varchar(255)"
 			),
+			"image"=>array(
+				"name"=>"图片",
+				"type"=>"varchar(255)"
+			),
+			"imagegroup"=>array(
+				"name"=>"图片组",
+				"type"=>"text"
+			),
 			"editor"=>array(
 				"name"=>"编辑器",
 				"type"=>"longtext"

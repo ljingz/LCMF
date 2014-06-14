@@ -27,6 +27,34 @@
   	
   </case>
   <case value="file">
+  	<div id="upload_{$field.name}" class="webuploader">
+		    <div class="queueList">
+		        <div class="dndArea placeholder">
+		            <div class="filePicker"></div>
+		            <center>或将照片拖到这里，单次最多可选300张</center>
+		        </div>
+		    </div>
+		    <div class="statusBar" style="display:none;">
+		        <div class="progress">
+		            <span class="text">0%</span>
+		            <span class="percentage"></span>
+		        </div><div class="info"></div>
+		        <div class="btns">
+		            <div class="filePicker2"></div><div class="uploadBtn">开始上传</div>
+		        </div>
+		    </div>
+		</div>
+		<script type="text/javascript">
+			var upload_{$field.name} = new LCMFUpload({
+				wrap: "#upload_{$field.name}",
+			});
+			upload_{$field.name}.init();
+		</script>
+  </case>
+  <case value="image">
+		
+  </case>
+  <case value="imagegroup">
   	
   </case>
   <case value="editor">
