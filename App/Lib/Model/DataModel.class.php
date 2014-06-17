@@ -14,6 +14,7 @@ class DataModel extends BaseModel {
 		try{
 			$data["dataid"] = parent::insert();
 			$Model = D($table["name"]);
+			$data = $this->assembly($data, $table["field"]);
 			if($Model->add($data) === false){
 				Log::write($this->getDbError());
 				throw new Exception("添加数据失败");
@@ -32,6 +33,7 @@ class DataModel extends BaseModel {
 		try{
 			parent::update();
 			$Model = D($table["name"]);
+			$data = $this->assembly($data, $table["field"]);
 			if($Model->save($data) === false){
 				Log::write($this->getDbError());
 				throw new Exception("编辑数据失败");
@@ -41,6 +43,28 @@ class DataModel extends BaseModel {
 			$this->rollback();
 			throw new Exception($ex->getMessage());
 		}
+	}
+	
+	protected function assembly($data, $fields){
+		foreach($fields as $field){
+			switch($field["element"]){
+				case "file":
+				case "image":
+					if(isset($data[$field["name"]])){
+						$data[$field["name"]] = requestFilterDecode($data[$field["name"]]);
+					}
+				break;
+				case "imagegroup":
+					if(isset($data[$field["name"]])){
+						foreach($data[$field["name"]] as &$value){
+							$value = json_decode(requestFilterDecode($value), true);
+						}
+						$data[$field["name"]] = json_encode($data[$field["name"]]);
+					}
+				break;
+			}
+		}
+		return $data;
 	}
 	
 	public function setValue($columnid, $dataid, $data = array()){
@@ -61,18 +85,33 @@ class DataModel extends BaseModel {
 		$options["join"] = "__".strtoupper($table["name"])."__ t USING(dataid)";
 		$options["query"]["d.columnid"] = $columnid;
 		$list = parent::getPageList($options);
+		foreach($list["datas"] as &$data){
+			$data = $this->disassembly($data, $table["field"]);
+		}
 		return $list;
 	}
 	
 	public function getInfo($columnid, $dataid = null){
 		$Column = D("Column");
+		$table = $Column->getTable($columnid);
+		$Model = D($table["name"]);
 		if(!empty($dataid)){
 			$this->where(array("dataid"=>$dataid));
 		}
 		$data = $this->where(array("columnid"=>$columnid))->find();
-		$table = $Column->getTable($columnid);
-		$Model = D($table["name"]);
-		$data = array_merge($Model->find($data["dataid"]), $data);
+		$slave = $Model->find($data["dataid"]);
+		$slave = $this->disassembly($slave, $table["field"]);
+		return array_merge($slave, $data);
+	}
+	
+	protected function disassembly($data, $fields){
+		foreach($fields as $field){
+			if(in_array($field["element"], array("file", "image", "imagegroup"))){
+				if(isset($data[$field["name"]])){
+					$data[$field["name"]] = json_decode($data[$field["name"]], true);
+				}
+			}
+		}
 		return $data;
 	}
 }

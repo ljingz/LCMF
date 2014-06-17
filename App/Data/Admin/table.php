@@ -44,11 +44,11 @@ return array(
 			),
 			"file"=>array(
 				"name"=>"文件",
-				"type"=>"varchar(255)"
+				"type"=>"varchar(1020)"
 			),
 			"image"=>array(
 				"name"=>"图片",
-				"type"=>"varchar(255)"
+				"type"=>"varchar(1020)"
 			),
 			"imagegroup"=>array(
 				"name"=>"图片组",
