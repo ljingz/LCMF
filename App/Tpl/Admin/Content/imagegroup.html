@@ -7,6 +7,7 @@
 				或将文件拖到这里，单次最多可选50个
 			</center>
 		</div>
+		<ul class="filelist"></ul>
 	</div>
 	<div class="statusBar" style="display:none;">
 		<div class="progress">
@@ -33,4 +34,5 @@
     fileSingleSizeLimit: {:C("UPLOAD_MAX_SIZE")}
 	});
 	upload.init();
+	upload.load({$data[$field['name']]|json_encode});
 </script>
