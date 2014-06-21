@@ -47,20 +47,20 @@ class DataModel extends BaseModel {
 	
 	protected function assembly($data, $fields){
 		foreach($fields as $field){
+			if(!isset($data[$field["name"]])){
+				$data[$field["name"]] = NULL;
+				continue;
+			}
 			switch($field["element"]){
 				case "file":
 				case "image":
-					if(isset($data[$field["name"]])){
-						$data[$field["name"]] = requestFilterDecode($data[$field["name"]]);
-					}
+					$data[$field["name"]] = requestFilterDecode($data[$field["name"]]);
 				break;
 				case "imagegroup":
-					if(isset($data[$field["name"]])){
-						foreach($data[$field["name"]] as &$value){
-							$value = json_decode(requestFilterDecode($value), true);
-						}
-						$data[$field["name"]] = json_encode($data[$field["name"]]);
+					foreach($data[$field["name"]] as &$value){
+						$value = json_decode(requestFilterDecode($value), true);
 					}
+					$data[$field["name"]] = json_encode($data[$field["name"]]);
 				break;
 			}
 		}
@@ -99,9 +99,9 @@ class DataModel extends BaseModel {
 			$this->where(array("dataid"=>$dataid));
 		}
 		$data = $this->where(array("columnid"=>$columnid))->find();
-		$slave = $Model->find($data["dataid"]);
-		$slave = $this->disassembly($slave, $table["field"]);
-		return array_merge($slave, $data);
+		$tabledata = $Model->find($data["dataid"]);
+		$tabledata = $this->disassembly($tabledata, $table["field"]);
+		return array_merge($tabledata, $data);
 	}
 	
 	protected function disassembly($data, $fields){

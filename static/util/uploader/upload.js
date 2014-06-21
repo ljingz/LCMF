@@ -186,7 +186,7 @@ LCMFUpload.prototype.init = function() {
 
 	// 当有文件添加进来时执行，负责view的创建
 	function addFile(file) {
-		var $li = $('<li id="' + file.id + '">' + '<p class="title">' + file.name + '</p>' + '<p class="imgWrap"></p>' + '<p class="progress"><span></span></p>' + '</li>'), 
+		var $li = $('<li id="' + file.id + '" title="' + file.name + '&#10;' + WebUploader.formatSize(file.size) + '">' + '<p class="title">' + file.name + '</p>' + '<p class="imgWrap"></p>' + '<p class="progress"><span></span></p>' + '</li>'), 
 		$btns = $('<div class="file-panel">' + '<span class="cancel">删除</span>' + '<span class="rotateRight">向右旋转</span>' + '<span class="rotateLeft">向左旋转</span></div>').appendTo($li), 
 		$prgress = $li.find('p.progress span'), 
 		$wrap = $li.find('p.imgWrap'), 
@@ -383,7 +383,6 @@ LCMFUpload.prototype.init = function() {
 
 		removeFile(file);
 		updateTotalProgress();
-
 	};
 
 	self.uploader.onUploadSuccess = function(file, response) {
@@ -426,6 +425,9 @@ LCMFUpload.prototype.init = function() {
 		if ($(this).hasClass('disabled')) {
 			return false;
 		}
+		if (!self.uploader.getStats()["queueNum"]) {
+			return false;
+		}
 		
 		if (self.state === 'ready') {
 			self.uploader.upload();
@@ -454,7 +456,7 @@ LCMFUpload.prototype.load = function(files) {
 	
 	// 当有文件添加进来时执行，负责view的创建
 	function addFile(file) {
-		var $li = $('<li id="' + file.hash + '">' + '<p class="title">' + file.name + '</p>' + '<p class="imgWrap"></p>' + '</li>'), 
+		var $li = $('<li id="' + file.hash + '" title="' + file.name + '&#10;' + WebUploader.formatSize(file.size) + '">' + '<p class="title">' + file.name + '</p>' + '<p class="imgWrap"></p>' + '</li>'), 
 		$btns = $('<div class="file-panel">' + '<span class="cancel">删除</span>' + '<span class="rotateRight">向右旋转</span>' + '<span class="rotateLeft">向左旋转</span></div>').appendTo($li), 
 		$prgress = $li.find('p.progress span'), 
 		$wrap = $li.find('p.imgWrap');
@@ -557,7 +559,7 @@ LCMFUpload.prototype.updateStatus = function() {
 
 	} else {
 		stats = self.uploader.getStats();
-		text = '共' + self.fileCount + '个（' + WebUploader.formatSize(self.fileSize) + '），已上传' + stats.successNum + '个';
+		text = '共' + self.fileCount + '个（' + WebUploader.formatSize(self.fileSize) + '），本次上传' + stats.successNum + '个';
 
 		if (stats.uploadFailNum) {
 			text += '，失败' + stats.uploadFailNum + '个';
@@ -569,7 +571,6 @@ LCMFUpload.prototype.updateStatus = function() {
 
 LCMFUpload.prototype.setState = function(val) {
 	var self = this, file, stats;
-	
 	/*if (val === self.state) {
 		return;
 	}*/

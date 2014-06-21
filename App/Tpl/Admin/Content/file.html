@@ -24,13 +24,13 @@
 </div>
 <script type="text/javascript">
 	var upload = new LCMFUpload("#{$rand_string}", "{$field.name}", {
-	accept: {
-	title: 'Files',
-	extensions: '{:implode(",",C("UPLOAD_ALLOW_TYPE.FILE.extension"))}',
-	mimeTypes: '{:implode(",",C("UPLOAD_ALLOW_TYPE.FILE.mimeType"))}'
-	},
-	fileNumLimit: 1,
-	fileSingleSizeLimit: {:C("UPLOAD_MAX_SIZE")}
+		accept: {
+			title: 'Files',
+			extensions: '{:implode(",",C("UPLOAD_ALLOW_TYPE.FILE.extension"))}',
+			mimeTypes: '{:implode(",",C("UPLOAD_ALLOW_TYPE.FILE.mimeType"))}'
+		},
+		fileNumLimit: 1,
+		fileSingleSizeLimit: {:C("UPLOAD_MAX_SIZE")}
 	});
 	upload.init();
 	upload.load({$data[$field['name']]|json_encode});

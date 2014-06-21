@@ -2,7 +2,7 @@
 return array(
 	//上传配置
 	'UPLOAD_PATH'              => 'static/attachment/default/',
-	'UPLOAD_MAX_SIZE'          => 2,
+	'UPLOAD_MAX_SIZE'          => 20,
 	'UPLOAD_ALLOW_TYPE'        => array(
 		'IMAGE'=>array(
 			'mimeType'=>array('image/*'),
