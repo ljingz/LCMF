@@ -45,16 +45,16 @@
 			<li><a class="edit" href="__URL__/edit/columnid/{$Think.get.columnid}/dataid/{dataid}" target="navTab" rel="Data-{$Think.get.columnid}-edit" title="编辑信息"><span>编辑</span></a></li>
 			<php>}</php>
 			<php>if(in_array("enable", $table["action"])){</php>
-			<li><a class="lock" href="__URL__/enable/columnid/{$Think.get.columnid}/value/0" target="selectedTodo" rel="dataid[]" title="锁定"><span>锁定</span></a></li>
-			<li><a class="canclelock" href="__URL__/enable/columnid/{$Think.get.columnid}/value/1" target="selectedTodo" rel="dataid[]" title="取消锁定"><span>取消锁定</span></a></li>
+			<li><a class="lock" href="__URL__/enable/columnid/{$Think.get.columnid}/value/0" target="selectedTodo" rel="dataid[]"><span>锁定</span></a></li>
+			<li><a class="canclelock" href="__URL__/enable/columnid/{$Think.get.columnid}/value/1" target="selectedTodo" rel="dataid[]"><span>取消锁定</span></a></li>
 			<php>}</php>
 			<php>if(in_array("recommend", $table["action"])){</php>
-			<li><a class="recommend" href="__URL__/recommend/columnid/{$Think.get.columnid}/value/1" target="selectedTodo" rel="dataid[]" title="推荐"><span>推荐</span></a></li>
-			<li><a class="canclerecommend" href="__URL__/recommend/columnid/{$Think.get.columnid}/value/0" target="selectedTodo" rel="dataid[]" title="取消推荐"><span>取消推荐</span></a></li>
+			<li><a class="recommend" href="__URL__/recommend/columnid/{$Think.get.columnid}/value/1" target="selectedTodo" rel="dataid[]"><span>推荐</span></a></li>
+			<li><a class="canclerecommend" href="__URL__/recommend/columnid/{$Think.get.columnid}/value/0" target="selectedTodo" rel="dataid[]"><span>取消推荐</span></a></li>
 			<php>}</php>
 			<php>if(in_array("headline", $table["action"])){</php>
-			<li><a class="headline" href="__URL__/headline/columnid/{$Think.get.columnid}/value/1" target="selectedTodo" rel="dataid[]" title="头条"><span>头条</span></a></li>
-			<li><a class="cancleheadline" href="__URL__/headline/columnid/{$Think.get.columnid}/value/0" target="selectedTodo" rel="dataid[]" title="取消头条"><span>取消头条</span></a></li>
+			<li><a class="headline" href="__URL__/headline/columnid/{$Think.get.columnid}/value/1" target="selectedTodo" rel="dataid[]"><span>头条</span></a></li>
+			<li><a class="cancleheadline" href="__URL__/headline/columnid/{$Think.get.columnid}/value/0" target="selectedTodo" rel="dataid[]"><span>取消头条</span></a></li>
 			<php>}</php>
 		</ul>
 	</div>
