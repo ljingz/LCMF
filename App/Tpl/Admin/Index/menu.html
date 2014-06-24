@@ -1,5 +1,5 @@
 <php>
-	function buildHtml($columns){
+	function buildColumnMenuHtml($columns){
 		foreach($columns as $column){
 			$html .= '<li>';
 			if(!empty($column["table"])){
@@ -11,7 +11,7 @@
 			$html	.= '</a>';
 			if(!empty($column["child"])){
 					$html .= '<ul>';
-					$html .= buildHtml($column["child"]);
+					$html .= buildColumnMenuHtml($column["child"]);
 					$html .= '</ul>';
 			}
 			$html .= '</li>';
@@ -26,7 +26,7 @@
   </div>
   <div class="accordionContent">
     <ul class="tree treeFolder">
-      {:buildHtml(D("Column")->getTree())}
+      {:buildColumnMenuHtml(D("Column")->getTree())}
     </ul>
   </div>
   <!-- end accordionContent -->
@@ -34,7 +34,8 @@
     <h2><span>Folder</span>其他管理</h2>
   </div>
   <div class="accordionContent">
-    <ul class="tree">
+    <ul class="tree treeFolder">
+      <li><a href="__GROUP__/Message" target="navTab" rel="Message">留言管理</a></li>
       <li><a href="__GROUP__/Ad" target="navTab" rel="Ad">广告管理</a></li>
     </ul>
   </div>

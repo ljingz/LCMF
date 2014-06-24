@@ -3,7 +3,6 @@ if(!defined('APP_NAME')) exit('Access Denied');
 
 class AdminAction extends BaseAction {
 	public function index(){
-		import("ORG.Util.Page");
 		$Admin = D("Admin");
 		$username = $this->_get("username");
 		if(!empty($username)){

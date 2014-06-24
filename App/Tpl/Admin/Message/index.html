@@ -1,0 +1,55 @@
+<extend name="./base_datagird" />
+
+<block name="pageHeader">
+  <div class="pageHeader">
+    <form method="get" action="__ACTION__" rel="pagerForm" onsubmit="return navTabSearch(this)">
+    <div class="searchBar">
+      <table class="searchContent">
+        <tr>
+          <td>
+          	关键字：<input type="text" name="keyword" value="{$Think.get.keyword}" />
+          </td>
+          <td>
+            <div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div>
+          </td>
+        </tr>
+      </table>
+    </div>
+    </form>
+  </div>
+</block>
+
+<block name="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="delete" href="__URL__/delete" target="selectedTodo" rel="messageid[]" title="确定要删除吗?"><span>删除</span></a></li>
+			<li><a class="edit" href="__URL__/reply/messageid/{messageid}" target="navTab" title="回复留言"><span>回复</span></a></li>
+			<li><a class="preview" href="__URL__/view/messageid/{messageid}" target="navTab" title="查看留言"><span>查看</span></a></li>
+		</ul>
+	</div>
+
+	<table class="list" width="100%" layoutH="91">
+		<thead>
+			<tr>
+				<th width="60"><label><input type="checkbox" group="messageid[]" class="checkboxCtrl"> ID</label></th>
+				<th>姓名</th>
+				<th>邮箱</th>
+				<th>电话</th>
+				<th width="120">客户IP地址</th>
+				<th width="140">提交时间</th>
+			</tr>
+		</thead>
+		<tbody>
+    	<volist name="datas" id="vo">
+			<tr target="messageid" rel="{$vo.messageid}">
+      	<td><label><input name="messageid[]" value="{$vo.messageid}" type="checkbox"> {$vo.messageid}</label></td>
+				<td>{$vo.name}</td>
+				<td>{$vo.email}</td>
+				<td>{$vo.phone}</td>
+				<td>{$vo.clientip|default="--"}</td>
+				<td>{$vo.createtime|date='Y-m-d H:i:s',###}</td>
+			</tr>
+			</volist>
+		</tbody>
+	</table>
+</block>

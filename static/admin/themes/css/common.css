@@ -89,6 +89,9 @@
 .panelBar .toolBar a.delete span {
 	background: url(../default/images/grid/delete.png) left no-repeat;
 }
+.panelBar .toolBar a.preview span {
+	background: url(../default/images/grid/preview.png) left no-repeat;
+}
 .panelBar .toolBar a.lock span {
 	background: url(../default/images/grid/lock.png) left no-repeat;
 }
