@@ -23,8 +23,7 @@
 	<div class="panelBar">
 		<ul class="toolBar">
 			<li><a class="delete" href="__URL__/delete" target="selectedTodo" rel="messageid[]" title="确定要删除吗?"><span>删除</span></a></li>
-			<li><a class="edit" href="__URL__/reply/messageid/{messageid}" target="navTab" title="回复留言"><span>回复</span></a></li>
-			<li><a class="preview" href="__URL__/view/messageid/{messageid}" target="navTab" title="查看留言"><span>查看</span></a></li>
+			<li><a class="preview" href="__URL__/view/messageid/{messageid}" target="navTab" rel="Message-view" title="查看留言"><span>查看</span></a></li>
 		</ul>
 	</div>
 
@@ -32,9 +31,9 @@
 		<thead>
 			<tr>
 				<th width="60"><label><input type="checkbox" group="messageid[]" class="checkboxCtrl"> ID</label></th>
-				<th>姓名</th>
-				<th>邮箱</th>
-				<th>电话</th>
+				<volist name=":data('message','list')" id="field">
+				<th>{:data("message","field",$field,"name")}</th>
+				</volist>
 				<th width="120">客户IP地址</th>
 				<th width="140">提交时间</th>
 			</tr>
@@ -43,9 +42,9 @@
     	<volist name="datas" id="vo">
 			<tr target="messageid" rel="{$vo.messageid}">
       	<td><label><input name="messageid[]" value="{$vo.messageid}" type="checkbox"> {$vo.messageid}</label></td>
-				<td>{$vo.name}</td>
-				<td>{$vo.email}</td>
-				<td>{$vo.phone}</td>
+				<volist name=":data('message','list')" id="field">
+				<th>{$vo[$field]}</th>
+				</volist>
 				<td>{$vo.clientip|default="--"}</td>
 				<td>{$vo.createtime|date='Y-m-d H:i:s',###}</td>
 			</tr>

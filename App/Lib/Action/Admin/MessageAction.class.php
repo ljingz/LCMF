@@ -25,20 +25,19 @@ class MessageAction extends BaseAction {
 		}
 	}
 	
-	public function reply($messageid){
+	public function view($messageid){
 		$Message = D("Message");
-		$data = $Message->find($messageid);
+		$data = $Message->getInfo($messageid);
 		$this->assign("data", $data);
-		$this->display("info");
+		$this->display();
 	}
 	
-	public function replydo(){
+	public function reply(){
 		$Message = D("Message");
 		try{
 			$Message->update();
 			$this->success("回复留言成功", null, array(
-				"callbackType"=>"closeCurrent",
-				"navTabId"=>MODULE_NAME
+				"callbackType"=>"closeCurrent"
 			));
 		}catch(Exception $ex){
 			$this->error($ex->getMessage());
