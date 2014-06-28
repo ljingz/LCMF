@@ -43,7 +43,7 @@
 			<tr target="messageid" rel="{$vo.messageid}">
       	<td><label><input name="messageid[]" value="{$vo.messageid}" type="checkbox"> {$vo.messageid}</label></td>
 				<volist name=":data('message','list')" id="field">
-				<th>{$vo[$field]}</th>
+				<td>{$vo[$field]}</td>
 				</volist>
 				<td>{$vo.clientip|default="--"}</td>
 				<td>{$vo.createtime|date='Y-m-d H:i:s',###}</td>

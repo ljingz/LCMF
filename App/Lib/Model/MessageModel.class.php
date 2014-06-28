@@ -7,8 +7,13 @@ class MessageModel extends BaseModel {
 		array("createtime", "time", Model::MODEL_INSERT, "function")
 	);
 	
-	public function insert($data = array()){
-		
+	protected $_validate = array(
+        array("content", "require", "内容不能为空")
+    );
+	
+	public function insert($data){
+		$data = $this->encode($data);
+		return parent::insert($data);
 	}
 	
 	public function getPageList($options = array()){
@@ -33,7 +38,9 @@ class MessageModel extends BaseModel {
 				unset($data[$field]);
 			}
 		}
-		$data["extend"] = json_encode($data["extend"]);
+		if(is_array($extend)){
+			$data["extend"] = json_encode($extend);
+		}
 		return $data;
 	}
 	
