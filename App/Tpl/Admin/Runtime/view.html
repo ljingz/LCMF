@@ -3,6 +3,12 @@
 </style>
 
 <div class="runtime" layoutH="0">
-	<p><strong>Line {$totalRows-$listRows} - {$totalRows}:</strong></p>
+	<gt name="totalRows" value="$listRows">
+	<p>
+		<strong>
+			Line {$totalRows-$listRows} - {$totalRows}:
+		</strong>
+	</p>
+	</gt>
 	{:nl2br(htmlspecialchars($content))}
 </div>
