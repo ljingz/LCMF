@@ -1,0 +1,49 @@
+<extend name="./base_datagird" />
+
+<block name="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="delete" href="__URL__/delete&path={path}" target="ajaxTodo" title="确定要删除吗?"><span>删除</span></a></li>
+		</ul>
+	</div>
+
+	<table class="list" width="100%" layoutH="54">
+		<thead>
+			<tr>
+	      <th>名称</th>
+	      <th width="100">大小</th>
+	      <th width="80">用户</th>
+	      <th width="80">用户组</th>
+	      <th width="140">修改时间</th>
+			</tr>
+		</thead>
+		<tbody>
+    	<volist name="datas" id="vo">
+			<tr target="path" rel="{$vo.path}">
+      	<eq name='vo.type' value='file'>
+		    <td><a href="__URL__/view&path={$vo.path}" target="navTab" rel="Runtime-view">{$vo.name}</a></td>
+		    <td>{:W("FormatSize", array("size"=>$vo["size"]))}</td>
+		    <else/>
+		    <td><a href="__ACTION__&path={$vo.path}" target="navTab" rel="Runtime" title="系统缓存">{$vo.name}</a></td>
+		    <td>--</td>
+		    </eq>
+		    <td>{$vo.user}</td>
+		    <td>{$vo.group}</td>
+		    <td>{$vo.mtime|date='Y-m-d H:i:s',###}</td>
+			</tr>
+			</volist>
+		</tbody>
+	</table>
+	
+	<style type="text/css">
+		.panelBar .path {line-height: 25px; padding-left: 5px;}
+	</style>
+	<div class="panelBar">
+		<p class="path">
+		当前目录：APP/Runtime/{$Think.get.path}
+    <a href="__ACTION__<neq name='Think.get.path|dirname' value='.'>&path={$Think.get.path|dirname}</neq>" target="navTab" rel="Runtime" title="系统缓存">
+    返回上一目录
+    </a>
+   	</p>
+	</div>
+</block>

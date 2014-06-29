@@ -65,3 +65,28 @@ function getDirSize($dir){
 	closedir($handle);
 	return $size;
 }
+
+/**
+ * 递归删除目录内文件
+ * 
+ * @param string $path
+ * */
+function rmrf($path){
+	if(is_file($path)){
+		if(unlink($path) === false){
+			return false;
+		}
+	}elseif(is_dir($path)){
+		$handle = opendir($path);
+		while(($file = readdir($handle)) !== false){
+			if ($file != "." && $file != ".."){
+				rmrf($path."/".$file);
+			}
+		}
+		closedir($handle);
+		if(rmdir($path) === false){
+			return false;
+		}
+	}
+	return true;
+}
