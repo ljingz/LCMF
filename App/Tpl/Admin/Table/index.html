@@ -11,7 +11,7 @@
           	<select name="type">
           		<option value="">全部</option>
 		      		<volist name=":data('table','type')" id="value">
-							<option value="{$key}" <eq name="Think.get.type" value="$key">selected</eq>>{$value}</option>
+							<option value="{$key}" <eq name="Think.get.type" value="$key">selected</eq>>{$value.name}</option>
 							</volist>
 						</select>
           </td>
