@@ -2,6 +2,7 @@
 return array(
 	'APP_STATUS'               => 'debug',
 	'APP_GROUP_LIST'           => 'Admin,Home,Common',
+	'APP_AUTOLOAD_PATH'        => '@.TagLib',
 
 	//默认分组
 	'DEFAULT_GROUP'            => 'Home',
@@ -13,7 +14,7 @@ return array(
 	'DB_TYPE'                  => 'mysql',
 	'DB_HOST'                  => 'localhost',
 	'DB_PORT'                  => 3306,
-	'DB_NAME'                  => 'lcmf',
+	'DB_NAME'                  => 'haibang',
 	'DB_USER'                  => 'root',
 	'DB_PWD'                   => '1314',
 	'DB_PREFIX'                => 'lcmf_',
@@ -33,8 +34,11 @@ return array(
 	'TMPL_STRIP_SPACE'         => false,
 	'TMPL_PARSE_STRING'        => array(
 		'__STATIC__'           => __ROOT__.'/static',
-		'__PAGE__TITLE__'      => 'LCMF'
+		'__PAGE__TITLE__'      => '海邦投资'
 	),
+	
+	//标签配置
+	'TAGLIB_PRE_LOAD'          => 'column,data',
 	
 	//参数过滤函数
 	'VAR_FILTERS'              => 'requestFilterHandler',

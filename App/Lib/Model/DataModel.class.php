@@ -3,8 +3,12 @@ if(!defined('APP_NAME')) exit('Access Denied');
 
 class DataModel extends BaseModel {
 	protected $_auto = array (	
-		array("createtime", "time", Model::MODEL_INSERT, "function"),
+		array("createtime", "strtotime", Model::MODEL_BOTH, "function"),
 		array("modifiedtime", "time", Model::MODEL_BOTH, "function")
+	);
+	
+	protected $_defaults = array(
+		"order"=>"createtime DESC,dataid DESC"
 	);
 	
 	public function insert($data){
@@ -76,6 +80,19 @@ class DataModel extends BaseModel {
 		}catch(Exception $ex){
 			throw new Exception($ex->getMessage());
 		}
+	}
+	
+	public function getList($columnid, $options = array()){
+		$Column = D("Column");
+		$table = $Column->getTable($columnid);
+		$options["alias"] = "d";
+		$options["join"] = "__".strtoupper($table["name"])."__ t USING(dataid)";
+		$options["query"]["d.columnid"] = $columnid;
+		$datas = parent::getList($options);
+		foreach($datas as &$data){
+			$data = $this->disassembly($data, $table["field"]);
+		}
+		return $datas;
 	}
 	
 	public function getPageList($columnid, $options = array()){

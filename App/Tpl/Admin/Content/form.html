@@ -1,9 +1,6 @@
 <style type="text/css">
-	.pageFormField dd {
+	.pageFormField dl dd {
 		width: 85%;
-	}
-	.pageFormField dd .editor {
-		height: 300px;
 	}
 </style>
 <empty name="data.dataid">
@@ -15,7 +12,7 @@
 <volist name="table.field" id="field">
 <dl>
   <dt>{$field.title}：</dt>
-  <dd>
+  <dd class="{$field.element}">
   <switch name="field.element">
   <case value="textarea">
 		<include file="Content:textarea" />

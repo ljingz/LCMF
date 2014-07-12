@@ -110,3 +110,6 @@ ALTER TABLE `lcmf_table`     CHANGE `type` `type` ENUM('list','image','content')
 ALTER TABLE `lcmf_data` DROP PRIMARY KEY, ADD PRIMARY KEY (`dataid`);
 ALTER TABLE `lcmf_data`     CHANGE `dataid` `dataid` INT(11) NOT NULL AUTO_INCREMENT COMMENT '数据ID';
 ALTER TABLE `lcmf_data` ADD CONSTRAINT `FK_lcmf_data` FOREIGN KEY (`columnid`) REFERENCES `lcmf_column` (`columnid`) ON DELETE CASCADE ;
+
+#2014-07-12#
+ALTER TABLE `lcmf_column`     ADD COLUMN `link` VARCHAR(255) NULL COMMENT '链接' AFTER `tableid`;

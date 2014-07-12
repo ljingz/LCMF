@@ -5,5 +5,12 @@
 <block name="content">
   <div class="pageFormContent pageFormField nowrap" layoutH="97">
     <include file="Content:form" />
+    <dl>
+	  <dt>添加时间：</dt>
+	  <dd>
+	  	<input type="text" class="textInput date wh150" datefmt="yyyy-MM-dd HH:mm:ss" name="createtime" value="{$data.createtime|default=time()|date='Y-m-d H:i:s',###}"/>
+	  	<a class="inputDateButton" href="javascript:;">选择</a>
+	  </dd>
+	  </dl>
   </div>
 </block>

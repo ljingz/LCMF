@@ -61,6 +61,9 @@ class BaseModel extends Model {
 			}
 			$this->order($this->_defaults["order"]);
 		}
+		if(!empty($options["limit"])){
+			$this->limit($options["limit"]);
+		}
 		return $this;
 	}
 	
@@ -74,8 +77,9 @@ class BaseModel extends Model {
 		import("ORG.Util.Page");
 		$count = $this->parse($options)->count();
 		$Page = new Page($count, C("NUM_PER_PAGE"));
-		$datas = $this->limit($Page->firstRow, $Page->listRows)
-					  ->getList($options);
+		$datas = $this->parse($options)
+					  ->limit($Page->firstRow, $Page->listRows)
+					  ->select();
 		return array(
 			"datas"=>$datas,
 			"page"=>$Page

@@ -1,5 +1,5 @@
 <php>$rand_string = rand_string(32, 0);</php>
-<script id="{$rand_string}" name="{$field.name}" class="editor {$field.validate}" type="text/plain">{$data[$field['name']]|requestFilterDecode}</script>
+<script id="{$rand_string}" name="{$field.name}" class="box {$field.validate}" type="text/plain">{$data[$field['name']]|requestFilterDecode}</script>
 <script type="text/javascript">
-    var ue = UE.getEditor('{$rand_string}');
+    var ue = UE.getEditor('{$rand_string}', {initialFrameHeight: 350});
 </script>

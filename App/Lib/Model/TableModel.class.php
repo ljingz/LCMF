@@ -92,12 +92,16 @@ class TableModel extends BaseModel {
 	}
 	
 	public function getInfo($tableid){
-		$TableField = D("TableField");
-		$data = $this->find($tableid);
-		$data["action"] = json_decode($data["action"], true);
-		$data["field"] = $TableField->getList(array(
-			"query"=>array("tableid"=>$tableid)
-		));
-		return $data;
+		static $info = array();
+		if(!isset($info[$tableid])){
+			$TableField = D("TableField");
+			$data = $this->find($tableid);
+			$data["action"] = json_decode($data["action"], true);
+			$data["field"] = $TableField->getList(array(
+				"query"=>array("tableid"=>$tableid)
+			));
+			$info[$tableid] = $data;
+		}
+		return $info[$tableid];
 	}
 }
