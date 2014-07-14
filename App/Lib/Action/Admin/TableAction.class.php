@@ -2,6 +2,13 @@
 if(!defined('APP_NAME')) exit('Access Denied');
 
 class TableAction extends BaseAction {
+	public function _initialize(){
+		parent::_initialize();
+		if($this->loginUser["adminid"] > 0){
+			exit();
+		}
+	}
+	
 	public function index(){
 		$Table = D("Table");
 		$type = $this->_get("type");
