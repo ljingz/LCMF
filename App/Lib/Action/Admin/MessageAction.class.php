@@ -32,6 +32,14 @@ class MessageAction extends BaseAction {
 		$this->display();
 	}
 	
+	public function file($messageid){
+		import("ORG.Net.Http");
+		$Message = D("Message");
+		$data = $Message->getInfo($messageid);
+		$Http = new Http();
+		$Http->download(APP_ROOT.$data["file"]["savepath"], $data["file"]["name"]);
+	}
+	
 	public function reply(){
 		$Message = D("Message");
 		try{

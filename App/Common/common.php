@@ -16,7 +16,12 @@ load("extend");
 function data(){
 	static $filedatas = array();
 	$params = func_get_args();
-	$filename = sprintf("%sData/%s/%s.php", APP_PATH, GROUP_NAME, array_shift($params));
+	if(in_array($params[0], explode(",", C("APP_GROUP_LIST")))){
+		$group = array_shift($params);
+	}else{
+		$group = GROUP_NAME;
+	}
+	$filename = sprintf("%sData/%s/%s.php", APP_PATH, $group, array_shift($params));
 	if(!file_exists($filename)){
 		throw new Exception("The File Is Not Exist");
 	}
@@ -64,6 +69,19 @@ function getDirSize($dir){
 	}
 	closedir($handle);
 	return $size;
+}
+
+/**
+ * 递归创建目录
+ * 
+ * @param string $path
+ * */
+function mkdirs($path){
+	if(!is_dir($path)){
+		mkdirs(dirname($path));
+		mkdir($path);
+	}
+	return true;
 }
 
 /**

@@ -3,6 +3,7 @@ if(!defined('APP_NAME')) exit('Access Denied');
 
 class MessageModel extends BaseModel {
 	protected $_auto = array (
+		array("file", "json_encode", Model::MODEL_INSERT, "function"),
 		array("clientip", "get_client_ip", Model::MODEL_INSERT, "function"),
 		array("createtime", "time", Model::MODEL_INSERT, "function")
 	);
@@ -13,6 +14,13 @@ class MessageModel extends BaseModel {
 	
 	public function insert($data){
 		$data = $this->encode($data);
+		$fields = data("Admin", "message", "field");
+		foreach($fields as $name=>$field){
+			if($field["required"]){
+				$validate[] = array($name, "require", $field["name"]."不能为空");
+			}
+		}
+		$this->setProperty("_validate", $validate);
 		return parent::insert($data);
 	}
 	
@@ -45,6 +53,7 @@ class MessageModel extends BaseModel {
 	}
 	
 	protected function decode($data){
+		$data["file"] = json_decode($data["file"], true);
 		$data["extend"] = json_decode($data["extend"], true);
 		if(is_array($data["extend"])){
 			$data = array_merge($data, $data["extend"]);

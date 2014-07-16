@@ -43,7 +43,13 @@
 			<tr target="messageid" rel="{$vo.messageid}">
       	<td><label><input name="messageid[]" value="{$vo.messageid}" type="checkbox"> {$vo.messageid}</label></td>
 				<volist name=":data('message','list')" id="field">
-				<td>{$vo[$field]}</td>
+				<td>
+					<eq name="field" value="file">
+					<a href="__URL__/file/messageid/{$vo.messageid}">{$vo[$field][name]}</a>
+					<else/>
+					{$vo[$field]}
+					</eq>
+				</td>
 				</volist>
 				<td>{$vo.clientip|default="--"}</td>
 				<td>{$vo.createtime|date='Y-m-d H:i:s',###}</td>

@@ -13,7 +13,7 @@ class UploadAction extends Action {
 			"subType" => "date",
 			"dateFormat" => "Ym"
 		);
-		$this->mkdir($config["savePath"]);
+		mkdirs($config["savePath"]);
 		$upload = new UploadFile($config);
 		if(!$upload->upload()) {
 			$this->error($upload->getErrorMsg());
@@ -23,15 +23,6 @@ class UploadAction extends Action {
 			$info["savepath"] = C("UPLOAD_PATH").$info["savename"];
 			$this->success($info);
 		}
-	}
-	
-	protected function mkdir($directory){
-		if(!file_exists($directory)){
-			$dirname = dirname($directory);
-			$this->mkdir($dirname);
-			mkdir($directory);
-		}
-		return true;
 	}
 	
 	protected function success($info){

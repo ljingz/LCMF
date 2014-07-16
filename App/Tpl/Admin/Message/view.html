@@ -18,7 +18,13 @@
   	<volist name=":data('message','field')" id="vo">
     <dl>
       <dt>{$vo.name}：</dt>
-      <dd>{$data[$key]}</dd>
+      <dd>
+      	<eq name="key" value="file">
+				<a href="__URL__/file/messageid/{$data.messageid}">{$data[$key][name]}</a>
+				<else/>
+				{$data[$key]}
+				</eq>
+      </dd>
     </dl>
     </volist>
     <dl>
