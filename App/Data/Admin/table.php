@@ -4,15 +4,11 @@ if(!defined('APP_NAME')) exit('Access Denied');
 return array(
 	"type"=>array(
 		"list"=>array(
-			"name"=>"文字列表",
-			"module"=>"List"
-		),
-		"image"=>array(
-			"name"=>"图片列表",
+			"name"=>"列表",
 			"module"=>"List"
 		),
 		"content"=>array(
-			"name"=>"文字内容",
+			"name"=>"内容",
 			"module"=>"Content"
 		)
 	),
