@@ -53,17 +53,13 @@ class BaseModel extends Model {
 		if(!empty($options["query"])){
 			$this->where($options["query"]);
 		}
-		if(!empty($options["order"])){
-			$this->order($options["order"]);
-		}else{
-			if(empty($this->_defaults["order"])){
-				$this->_defaults["order"] = sprintf("%s ASC", $this->getPk());
-			}
-			$this->order($this->_defaults["order"]);
-		}
 		if(!empty($options["limit"])){
 			$this->limit($options["limit"]);
 		}
+		if(empty($this->_defaults["order"])){
+			$this->_defaults["order"] = sprintf("%s ASC", $this->getPk());
+		}
+		$this->order(implode(",", array_filter(array($options["order"], $this->_defaults["order"]))));
 		return $this;
 	}
 	
