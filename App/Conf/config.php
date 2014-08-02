@@ -38,7 +38,7 @@ return array(
 	),
 	
 	//标签配置
-	'TAGLIB_PRE_LOAD'          => 'column,data',
+	'TAGLIB_PRE_LOAD'          => 'column,data,tool',
 	
 	//参数过滤函数
 	'VAR_FILTERS'              => 'requestFilterHandler',
