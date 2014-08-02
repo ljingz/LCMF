@@ -121,6 +121,33 @@ class DataModel extends BaseModel {
 		return array_merge($tabledata, $data);
 	}
 	
+	public function getSearchList($keyword){
+		import("ORG.Util.Page");
+		$Table = D("Table");
+		$datas = array();
+		if($keyword != ""){
+			$tables = $Table->getList(array("query"=>array("type"=>"list")));
+			foreach($tables as $table){
+				$Model = D(ucfirst($table["name"]));
+				$fields = $Model->getDbFields();
+				if(in_array("title", $fields)){
+					$options["alias"] = "d";
+					$options["join"] = "__".strtoupper($table["name"])."__ t USING(dataid)";
+					$options["query"] = array("title"=>array("like", "%".$keyword."%"));
+					$_datas = parent::getList($options);
+					if(is_array($_datas)){
+						$datas = array_merge($datas, $_datas);
+					}
+				}
+			}
+		}
+		$Page = new Page(count($datas), C("NUM_PER_PAGE"));
+		return array(
+			"datas"=>array_slice($datas, $Page->firstRow, $Page->listRows),
+			"page"=>$Page
+		);
+	}
+	
 	protected function disassembly($data, $fields){
 		foreach($fields as $field){
 			if(in_array($field["element"], array("file", "image", "imagegroup"))){
