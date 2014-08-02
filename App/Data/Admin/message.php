@@ -4,7 +4,8 @@ if(!defined('APP_NAME')) exit('Access Denied');
 return array(
 	"field"=>array(
 		"name"=>array(
-			"name"=>"姓名"
+			"name"=>"姓名",
+			"required"=>true
 		),
 		"sex"=>array(
 			"name"=>"性别"
