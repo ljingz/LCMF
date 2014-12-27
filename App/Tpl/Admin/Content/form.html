@@ -2,6 +2,9 @@
 	.pageFormField dl dd {
 		width: 85%;
 	}
+	.pageFormField label {
+		width: auto;
+	}
 </style>
 <empty name="data.dataid">
 <input type="hidden" name="columnid" value="{$Think.get.columnid}"/>
@@ -16,6 +19,15 @@
   <switch name="field.element">
   <case value="textarea">
 		<include file="Content:textarea" />
+  </case>
+  <case value="select">
+		<include file="Content:select" />
+  </case>
+  <case value="radio">
+		<include file="Content:radio" />
+  </case>
+  <case value="checkbox">
+		<include file="Content:checkbox" />
   </case>
   <case value="date">
   	<include file="Content:date" />

@@ -23,7 +23,7 @@ CREATE TABLE `lcmf_admin` (
   `createtime` int(11) NOT NULL COMMENT '创建时间',
   PRIMARY KEY (`adminid`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 /*Table structure for table `lcmf_column` */
 
@@ -36,7 +36,7 @@ CREATE TABLE `lcmf_column` (
   `sequence` int(11) DEFAULT '0' COMMENT '排序',
   PRIMARY KEY (`columnid`),
   KEY `parentid` (`parentid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 /*Table structure for table `lcmf_data` */
 
@@ -51,7 +51,7 @@ CREATE TABLE `lcmf_data` (
   PRIMARY KEY (`dataid`),
   KEY `columnid` (`columnid`),
   CONSTRAINT `FK_lcmf_data` FOREIGN KEY (`columnid`) REFERENCES `lcmf_column` (`columnid`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
 
 /*Table structure for table `lcmf_message` */
 
@@ -70,7 +70,7 @@ CREATE TABLE `lcmf_message` (
   `clientip` varchar(50) NOT NULL COMMENT '客户IP地址',
   `createtime` int(11) NOT NULL COMMENT '提交时间',
   PRIMARY KEY (`messageid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 /*Table structure for table `lcmf_table` */
 
@@ -83,7 +83,7 @@ CREATE TABLE `lcmf_table` (
   `action` varchar(255) DEFAULT NULL COMMENT '操作方法',
   PRIMARY KEY (`tableid`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
 
 /*Table structure for table `lcmf_table_field` */
 
@@ -93,13 +93,14 @@ CREATE TABLE `lcmf_table_field` (
   `name` varchar(20) NOT NULL COMMENT '字段名',
   `title` varchar(50) NOT NULL COMMENT '字段标题',
   `element` varchar(20) NOT NULL COMMENT '表单元素',
+  `options` varchar(1020) DEFAULT NULL COMMENT '表单选值',
   `validate` varchar(20) DEFAULT NULL COMMENT '表单验证',
   `list` enum('0','1') DEFAULT '0' COMMENT '列表展示',
   `sequence` int(11) DEFAULT '0' COMMENT '表单顺序',
   PRIMARY KEY (`fieldid`),
   UNIQUE KEY `table-field-name` (`tableid`,`name`),
   CONSTRAINT `FK_lcmf_table_field` FOREIGN KEY (`tableid`) REFERENCES `lcmf_table` (`tableid`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=93 DEFAULT CHARSET=utf8;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

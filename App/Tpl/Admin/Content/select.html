@@ -1,0 +1,5 @@
+<select name="{$field.name}">
+	<volist name=":explode(',', $field['options'])" id="value">
+	<option value="{$value}" <eq name="value" value="$data[$field['name']]">selected</eq>>{$value}</option>
+	</volist>
+</select>

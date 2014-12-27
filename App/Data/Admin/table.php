@@ -30,6 +30,18 @@ return array(
 				"name"=>"多行文本框",
 				"type"=>"text"
 			),
+			"select"=>array(
+				"name"=>"下拉框",
+				"type"=>"varchar(255)"
+			),
+			"radio"=>array(
+				"name"=>"单选框",
+				"type"=>"varchar(255)"
+			),
+			"checkbox"=>array(
+				"name"=>"多选框",
+				"type"=>"varchar(1020)"
+			),
 			"date"=>array(
 				"name"=>"日期",
 				"type"=>"date"

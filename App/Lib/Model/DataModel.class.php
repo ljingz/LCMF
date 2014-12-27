@@ -56,6 +56,9 @@ class DataModel extends BaseModel {
 				continue;
 			}
 			switch($field["element"]){
+				case "checkbox":
+					$data[$field["name"]] = implode(",", $data[$field["name"]]);
+				break;
 				case "file":
 				case "image":
 					$data[$field["name"]] = requestFilterDecode($data[$field["name"]]);
@@ -150,6 +153,11 @@ class DataModel extends BaseModel {
 	
 	protected function disassembly($data, $fields){
 		foreach($fields as $field){
+			if(in_array($field["element"], array("checkbox"))){
+				if(isset($data[$field["name"]])){
+					$data[$field["name"]] = explode(",", $data[$field["name"]]);
+				}
+			}
 			if(in_array($field["element"], array("file", "image", "imagegroup"))){
 				if(isset($data[$field["name"]])){
 					$data[$field["name"]] = json_decode($data[$field["name"]], true);

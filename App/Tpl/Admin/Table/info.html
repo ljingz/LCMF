@@ -85,6 +85,7 @@
 				</fieldHtml>
 				类型
 				</th>
+				<th type="text" name="field[#index#][options]" size="18">可选值</th>
 				<th type="select" name="field[#index#][validate]" width="16%">
 				<fieldHtml>
 				<select>
@@ -124,6 +125,9 @@
 							<option value="{$key}" <eq name="vo.element" value="$key">selected</eq>>{$value.name}</option>
 							</volist>
 						</select>
+					</td>
+					<td>
+						<input class="textInput" type="text" size="18" value="{$vo.options}" name="field[{$line}][options]">
 					</td>
 					<td>
 						<select name="field[{$line}][validate]">
