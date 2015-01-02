@@ -20,6 +20,7 @@ class BaseAction extends Action {
     public function view($columnid, $dataid=""){
     	$Data = D("Data");
     	$data = $Data->getInfo($columnid, $dataid);
+			$Data->setValue($columnid, $dataid, array("clicks"=>$data["clicks"] + 1));
     	$this->assign("data", $data);
     	$this->display();
     }

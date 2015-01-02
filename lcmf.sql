@@ -38,6 +38,22 @@ CREATE TABLE `lcmf_column` (
   KEY `parentid` (`parentid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
+/*Table structure for table `lcmf_content` */
+
+CREATE TABLE `lcmf_content` (
+  `dataid` int(11) NOT NULL,
+  `title` varchar(255) DEFAULT NULL COMMENT '标题',
+  `summary` text COMMENT '简介',
+  `content` longtext COMMENT '内容',
+  `file` varchar(1020) DEFAULT NULL COMMENT '文件',
+  `image` varchar(1020) DEFAULT NULL COMMENT '图片',
+  `imagegroup` text COMMENT '图片组',
+  `adddate` date DEFAULT NULL COMMENT '日期',
+  `addtime` datetime DEFAULT NULL COMMENT '时间',
+  PRIMARY KEY (`dataid`),
+  CONSTRAINT `FK_content` FOREIGN KEY (`dataid`) REFERENCES `lcmf_data` (`dataid`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 /*Table structure for table `lcmf_data` */
 
 CREATE TABLE `lcmf_data` (
@@ -46,12 +62,41 @@ CREATE TABLE `lcmf_data` (
   `enable` enum('1','0') DEFAULT '1' COMMENT '启用',
   `recommend` enum('0','1') DEFAULT '0' COMMENT '推荐',
   `headline` enum('0','1') DEFAULT '0' COMMENT '头条',
+  `clicks` int(11) DEFAULT '0' COMMENT '点击量',
   `modifiedtime` int(11) DEFAULT NULL COMMENT '修改时间',
   `createtime` int(11) NOT NULL COMMENT '添加时间',
   PRIMARY KEY (`dataid`),
   KEY `columnid` (`columnid`),
   CONSTRAINT `FK_lcmf_data` FOREIGN KEY (`columnid`) REFERENCES `lcmf_column` (`columnid`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
+
+/*Table structure for table `lcmf_friend` */
+
+CREATE TABLE `lcmf_friend` (
+  `dataid` int(11) NOT NULL,
+  `title` varchar(255) DEFAULT NULL COMMENT '名称',
+  `image` varchar(1020) DEFAULT NULL COMMENT '图片',
+  `url` varchar(255) DEFAULT NULL COMMENT '链接地址',
+  `summary` text COMMENT '备注',
+  `target` varchar(1020) DEFAULT NULL COMMENT '目标',
+  PRIMARY KEY (`dataid`),
+  CONSTRAINT `FK_friend` FOREIGN KEY (`dataid`) REFERENCES `lcmf_data` (`dataid`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Table structure for table `lcmf_image` */
+
+CREATE TABLE `lcmf_image` (
+  `dataid` int(11) NOT NULL,
+  `title` varchar(255) DEFAULT NULL COMMENT '标题',
+  `summary` text COMMENT '简介',
+  `content` longtext COMMENT '内容',
+  `author` varchar(255) DEFAULT NULL COMMENT '作者',
+  `source` varchar(255) DEFAULT NULL COMMENT '来源',
+  `image` varchar(1020) DEFAULT NULL COMMENT '图片',
+  `imagegroup` text COMMENT '图片组',
+  PRIMARY KEY (`dataid`),
+  CONSTRAINT `FK_image` FOREIGN KEY (`dataid`) REFERENCES `lcmf_data` (`dataid`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Table structure for table `lcmf_message` */
 
@@ -71,6 +116,19 @@ CREATE TABLE `lcmf_message` (
   `createtime` int(11) NOT NULL COMMENT '提交时间',
   PRIMARY KEY (`messageid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+/*Table structure for table `lcmf_news` */
+
+CREATE TABLE `lcmf_news` (
+  `dataid` int(11) NOT NULL,
+  `title` varchar(255) DEFAULT NULL COMMENT '标题',
+  `image` varchar(255) DEFAULT NULL COMMENT '图片',
+  `author` varchar(255) DEFAULT NULL COMMENT '作者',
+  `source` varchar(255) DEFAULT NULL COMMENT '来源',
+  `summary` text COMMENT '简介',
+  `content` longtext COMMENT '内容',
+  PRIMARY KEY (`dataid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Table structure for table `lcmf_table` */
 
@@ -101,6 +159,15 @@ CREATE TABLE `lcmf_table_field` (
   UNIQUE KEY `table-field-name` (`tableid`,`name`),
   CONSTRAINT `FK_lcmf_table_field` FOREIGN KEY (`tableid`) REFERENCES `lcmf_table` (`tableid`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=93 DEFAULT CHARSET=utf8;
+
+/*Table structure for table `lcmf_test` */
+
+CREATE TABLE `lcmf_test` (
+  `dataid` int(11) NOT NULL,
+  `title` varchar(255) DEFAULT NULL COMMENT '标题',
+  PRIMARY KEY (`dataid`),
+  CONSTRAINT `FK_test` FOREIGN KEY (`dataid`) REFERENCES `lcmf_data` (`dataid`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
