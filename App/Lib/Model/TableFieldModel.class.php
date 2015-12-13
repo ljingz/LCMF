@@ -75,4 +75,23 @@ class TableFieldModel extends BaseModel {
 			throw new Exception("更新模型表字段失败");
 		}
 	}
+	
+	public function getList($options = array()){
+		$datas = parent::getList($options);
+		foreach($datas as &$data){
+			if(preg_match("/^FK:/i", $data["options"])){
+				$options = explode("::", str_replace("FK:", "", $data["options"]));
+				$Model = D($options[0]);
+				$lines = $Model->select();
+				$data["fk_options"] = array();
+				foreach($lines as $line){
+					array_push($data["fk_options"], array(
+						"dataid"=>$line["dataid"],
+						"title"=>$line[$options[1]]
+					));
+				}
+			}
+		}
+		return $datas;
+	}
 }

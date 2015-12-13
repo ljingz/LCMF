@@ -1,5 +1,11 @@
 <select name="{$field.name}">
-	<volist name=":explode(',', $field['options'])" id="value">
-	<option value="{$value}" <eq name="value" value="$data[$field['name']]">selected</eq>>{$value}</option>
-	</volist>
+	<if condition="preg_match('/^FK:/i', $field['options'])">
+		<volist name="field.fk_options" id="option">
+		<option value="{$option.dataid}" <eq name="option.title" value="$data[$field['name']]">selected</eq>>{$option.title}</option>
+		</volist>
+	<else/>
+		<volist name=":explode(',', $field['options'])" id="value">
+		<option value="{$value}" <eq name="value" value="$data[$field['name']]">selected</eq>>{$value}</option>
+		</volist>
+	</if>
 </select>

@@ -1,3 +1,9 @@
-<volist name=":explode(',', $field['options'])" id="value">
-<label><input type="checkbox" name="{$field.name}[]" value="{$value}" <in name="value" value="$data[$field['name']]">checked</in>> {$value}</label>
-</volist>
+<if condition="preg_match('/^FK:/i', $field['options'])">
+	<volist name="field.fk_options" id="option">
+	<label><input type="checkbox" name="{$field.name}[]" value="{$option.dataid}" <in name="option.title" value="$data[$field['name']]">checked</in>> {$option.title}</label>
+	</volist>
+<else/>
+	<volist name=":explode(',', $field['options'])" id="value">
+	<label><input type="checkbox" name="{$field.name}[]" value="{$value}" <in name="value" value="$data[$field['name']]">checked</in>> {$value}</label>
+	</volist>
+</if>

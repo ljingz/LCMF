@@ -153,9 +153,12 @@ class DataModel extends BaseModel {
 	
 	protected function disassembly($data, $fields){
 		foreach($fields as $field){
-			if(in_array($field["element"], array("checkbox"))){
+			if(preg_match("/^FK:/i", $field["options"])){
 				if(isset($data[$field["name"]])){
-					$data[$field["name"]] = explode(",", $data[$field["name"]]);
+					$options = explode("::", str_replace("FK:", "", $field["options"]));
+					$Model = D($options[0]);
+					$values = $Model->where("dataid IN (%s)", $data[$field["name"]])->getField($options[1], true);
+					$data[$field["name"]] = implode(",", $values);
 				}
 			}
 			if(in_array($field["element"], array("file", "image", "imagegroup"))){
